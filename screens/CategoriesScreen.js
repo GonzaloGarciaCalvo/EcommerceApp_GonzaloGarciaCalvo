@@ -35,7 +35,7 @@ const CategoriesScreen = ({handleCategory}) => {
             <Header />
             <View style={styles.container}>
                 <Searcher additionalStyles={{
-                    backgroundColor: "white", width:'80%', flexDirection:'row'
+                    /* backgroundColor: "white", width:'80%', flexDirection:'row' */
                     // el flexDirection y width solo me los tomo en línea, no en el componente
                 }}>
                     <TextInput
@@ -45,7 +45,7 @@ const CategoriesScreen = ({handleCategory}) => {
                         style={styles.input}
                     />
                     <TouchableOpacity onPress={handleErase} style={styles.touchable}>
-                        <Entypo name="erase" size={24} color="black"  />
+                        <Entypo name="eraser" size={24} color="black"  />
                     </TouchableOpacity>
                 </Searcher>
                 <View style={styles.listContainer}>

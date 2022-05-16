@@ -42,17 +42,17 @@ const ProductsScreen = ({category = {id: 1, category: "Ropa"}, handleCategory}) 
             <Header title={category.category}/>
             <View style={styles.container}>
                 <Searcher additionalStyles={{
-                    backgroundColor:'white'
+                    /* backgroundColor: "white", width:'80%', flexDirection:'row' */
                 }}>
                     <TextInput
+                        style={styles.input}
                         value={input}
                         onChangeText={setInput}
                         keyboardType="default"
-                        style={styles.input}
                         placeholder = "Ingrese producto a buscar"
                     />
                     <TouchableOpacity onPress={handleErase}>
-                        <Entypo name="erase" size={30} color="black" />
+                        <Entypo name="eraser" size={30} color="black" />
                     </TouchableOpacity>
                 </Searcher>
                 <View style={styles.listContainer}>
@@ -64,10 +64,12 @@ const ProductsScreen = ({category = {id: 1, category: "Ropa"}, handleCategory}) 
         </>
     )
 }
-
 export default ProductsScreen
 
 const styles = StyleSheet.create({
+    keyboardAvoid: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         width: '100%',
@@ -76,15 +78,16 @@ const styles = StyleSheet.create({
         backgroundColor: colors.grisMarron,
     },
     input: {
-        width: '80%',
+        width: '75%',
         padding: 10,
-        margin: 10,
         backgroundColor: 'black',
-        borderRadius: 10,
-        color: 'white',
-        height: 50,
+        color:'white',
+        height: 40,
+        margin: 8,
+        borderRadius: 8,
+
     },
-    listContainer:{
+    listContainer: {
         flex: 1,
     }
 })

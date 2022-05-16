@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 28,
         color: 'white',
-        /* fontFamily: 'Koulen' */
+        /* fontFamily: 'Koulen', */
+        fontFamily:'PoppinsRegular',
+        textAlign:"center",
+        paddingTop:5,
     }
 })

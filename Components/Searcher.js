@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent:'center',
+        marginVertical:20,
+        backgroundColor: "white", 
+        width:'80%', 
+        flexDirection:'row'
         /* marginVertical: 10, */
         /* shadowColor: "#000", */
     

@@ -1,24 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../Styles/colors'
-import { Dimensions, useWindowDimensions } from 'react-native';
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const CategoryItem = ({category}) => {
-
-  const {width, height} = useWindowDimensions();
-
-  // console.log(windowWidth, windowHeight);
-  console.log("ancho: ",width, " alt: ", height)
-
   return (
-    <View style={{...styles.container, 
-      maxWidth: 0.38 * width,
-      maxHeight: 0.4 * width,
-      margin: width < 330 ? 8: 10,
-    }}>
+    <View style={styles.container}>
       <Text style={styles.text}>{category.category}</Text>
     </View>
   )
