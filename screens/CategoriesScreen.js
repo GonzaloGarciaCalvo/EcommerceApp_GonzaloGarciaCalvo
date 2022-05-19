@@ -7,7 +7,7 @@ import List from '../Components/List'
 import { CATEGORIES } from '../Data/categories';
 import { Entypo } from '@expo/vector-icons';
 
-const CategoriesScreen = ({handleCategory}) => {
+const CategoriesScreen = ({navigation}) => {
 
     const [input, setInput] = useState("")
     const [categoriesFilter, setCategoriesFilter] = useState(CATEGORIES)
@@ -27,7 +27,8 @@ const CategoriesScreen = ({handleCategory}) => {
 
     const handleSelectedCategory = (category) => {
         // console.log(category);
-        handleCategory(category)
+        // handleCategory(category)
+        navigation.push("Products")
     }
 
     return (

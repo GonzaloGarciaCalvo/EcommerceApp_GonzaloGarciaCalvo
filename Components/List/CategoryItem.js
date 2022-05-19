@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import { colors } from '../../Styles/colors'
 
 const CategoryItem = ({category}) => {
+  console.log("category:  ",category)
   return (
     <View style={styles.container}>
+        <Image  source={category.image} style={styles.image} />
       <Text style={styles.text}>{category.category}</Text>
     </View>
   )
@@ -15,22 +17,25 @@ export default CategoryItem
 const styles = StyleSheet.create({
   container: {
     width: 160,
-    height: 160,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    height: 187,
+    /* justifyContent: 'flex-end',
+    alignItems: 'flex-end', */
+    justifyContent:'center',
+    alignItems:'center',
     padding: 10,
     backgroundColor: 'white',
     margin: 12,
-    borderRadius: 10,
+    borderRadius: 0,
   },
   text: {
     fontSize: 16,
     /* fontFamily: 'LatoRegular', */
   },
-  /* image:{
-    width:150,
-    height:150
-  }, */
+  image:{
+    width:160,
+    height:160,
+    paddingTop:0,
+  },
 })
 
 /* source={require('../../assets/images/Spirits.jpg')} */
@@ -44,3 +49,4 @@ const styles = StyleSheet.create({
       <Text style={styles.text}>{category.category}</Text>
     </View>
    </ImageBackground> */} 
+   {/* <Image  source={require('../../assets/images/Spirits.jpg')} style={styles.image} /> */}

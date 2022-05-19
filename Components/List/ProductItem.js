@@ -4,7 +4,7 @@ import React from 'react'
 const ProductItem = ({product}) => {
   
   return (
-    <View>
+    <View style={styles.container}>
       <Image source={{uri: product.image}} style={styles.image}/>
       <Text style={styles.text}>{product.description}</Text>
     </View>
@@ -13,10 +13,12 @@ const ProductItem = ({product}) => {
 export default ProductItem
 
 const styles = StyleSheet.create({
-
+  container:{
+    marginBottom:40,
+  },
   image: {
-    width: 200,
-    height: 200,
+    width: 250,
+    height: 250,
     marginTop:30,
   },
   text:{

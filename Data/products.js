@@ -2,22 +2,22 @@ export const PRODUCTS = [
     {
         id: 1,
         category: 1,
-        description: "Product 1",
-        price: 29.99,
+        description: "Whiskey",
+        price: 39.99,
         image: "https://picsum.photos/200/300",
     },
     {
         id: 2,
         category: 2,
-        description: "Product 2",
-        price: 19.99,
+        description: "Ron",
+        price: 29.99,
         image: "https://picsum.photos/200/300"
     },
     {
         id: 3,
         category: 3,
-        description: "Product 3",
-        price: 49.08,
+        description: "Gin",
+        price: 19.90,
         image: "https://picsum.photos/200/300"
     },
     {

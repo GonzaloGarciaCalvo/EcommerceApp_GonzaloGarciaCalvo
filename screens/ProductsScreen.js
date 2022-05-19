@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Button, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import Searcher from '../Components/Searcher';
 import { Entypo } from '@expo/vector-icons';
@@ -7,7 +7,7 @@ import Header from '../Components/Header';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
 
-const ProductsScreen = ({category = {id: 1, category: "Ropa"}, handleCategory}) => {
+const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation}) => {
 
     const [input, setInput] = useState("");
     const [initialProducts, setInitialProducts] = useState([])
@@ -34,33 +34,50 @@ const ProductsScreen = ({category = {id: 1, category: "Ropa"}, handleCategory}) 
         setInitialProducts(productosIniciales);
     }, [])
 
-    console.log(initialProducts);
-    console.log(productsFiltered);
+/*     console.log(initialProducts);
+    console.log(productsFiltered); */
+
+    const handleDetailProduct = () => {
+        console.log("Se navegará hacia el detail");
+        navigation.navigate("Detail")
+    }
+
+    const handleBack = () => {
+        navigation.goBack();
+    }
 
     return (
         <>
-            <Header title={category.category}/>
-            <View style={styles.container}>
-                <Searcher additionalStyles={{
-                    /* backgroundColor: "white", width:'80%', flexDirection:'row' */
-                }}>
-                    <TextInput
-                        style={styles.input}
-                        value={input}
-                        onChangeText={setInput}
-                        keyboardType="default"
-                        placeholder = "Ingrese producto a buscar"
-                    />
-                    <TouchableOpacity onPress={handleErase}>
-                        <Entypo name="eraser" size={30} color="black" />
-                    </TouchableOpacity>
-                </Searcher>
-                <View style={styles.listContainer}>
-                    <List data={productsFiltered} itemType ={"Producto"} onPress={()=> {}}/>
-                    <Button title='Go back' onPress={()=>handleCategory(null)}/>
+            
+            
+            <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.keyboardAvoid}
+        >
+            <Header title={category.category} />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styles.container}>
+                    <Searcher additionalStyles={{
+                        backgroundColor: "white"
+                    }}>
+                        <TextInput
+                            value={input}
+                            onChangeText={setInput}
+                            keyboardType="default"
+                            style={styles.input}
+                            placeholder="Ingrese producto a buscar"
+                        />
+                        <TouchableOpacity onPress={handleErase}>
+                            <Entypo name="erase" size={30} color="black" />
+                        </TouchableOpacity>
+                    </Searcher>
+                    <View style={styles.listContainer}>
+                        <List data={productsFiltered} itemType={"Producto"} onPress={handleDetailProduct} />
+                        <Button title="Go back" onPress={handleBack} />
+                    </View>
                 </View>
-            </View>
-
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
         </>
     )
 }
@@ -91,3 +108,4 @@ const styles = StyleSheet.create({
         flex: 1,
     }
 })
+
