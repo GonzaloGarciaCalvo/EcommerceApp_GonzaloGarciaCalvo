@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import CategoriesScreen from '../../Screens/CategoriesScreen';
 import ProductsScreen from '../../Screens/ProductsScreen';
 import DetailScreen from '../../Screens/DetailScreen';
+import { colors } from '../../Styles/colors';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,13 +13,55 @@ function MainNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Categories"
-            screenOptions={{
-                headerShown: false
+             screenOptions={{
+              headerStyle: {
+                backgroundColor: colors.colorHeader
+              },
+              headerTintColor: "white",
+              headerTitleStyle: {
+                fontFamily: "PoppinsRegular",
+                fontSize: 28,
+              },
+              headerTitleAlign: "center",
+              // headerTransparent: true,
+              // header: () => {
+              //   return <Header/>
+              // }
             }}
         >
-        <Stack.Screen name="Categories" component={CategoriesScreen} />
-        <Stack.Screen name="Products" component={ProductsScreen} />
-        <Stack.Screen name="Detail" component={DetailScreen}/>
+        <Stack.Screen
+          name="Categories"
+          component={CategoriesScreen}
+          options={
+            {
+              title: "Khimera Spirits",
+            }
+    
+          }
+        />
+        <Stack.Screen
+          name="Products"
+          component={ProductsScreen}
+          options={({ route }) => ({
+            title: route.params.categoryTitle,
+            headerStyle: {
+              backgroundColor: colors.colorHeader
+            },
+          })
+          }
+        />
+        <Stack.Screen
+          name="Detail"
+          component={DetailScreen}
+          options={({ route }) => ({
+            title: route.params.productTitle,
+            /* headerTintColor: colors.colorHeader, */
+/*             headerStyle: {
+              backgroundColor: colors.colorHeader
+            }, */
+          })
+          }
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )

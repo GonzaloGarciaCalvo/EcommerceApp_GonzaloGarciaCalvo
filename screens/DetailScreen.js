@@ -1,17 +1,24 @@
 import { StyleSheet, Text, View, Image, Dimensions, Button, useWindowDimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Header from '../Components/Header'
+import { PRODUCTS } from '../Data/products'
+import { colors } from '../Styles/colors'
+/* import { Route } from 'react-router-dom'; */
 
-const DetailScreen = ({ product =
+const DetailScreen = ({ 
+    route,
+    navigation 
+}) => {
+     /*product =
     {
         id: 1,
         category: 1,
         description: "Whiskey",
         price: 39.99,
         image: "https://picsum.photos/200/300",
-    },
-    navigation }) => {
-
+    }, */   
+    const {productId} = route.params
+    const [product, setProduct] = useState(null)
     const {height, width} = useWindowDimensions();
     const [orientation, setOrientation] = useState("portrait")
 
@@ -25,21 +32,39 @@ const DetailScreen = ({ product =
         navigation.goBack();
     }
 
+    useEffect(()=> {
+        const productSelected = PRODUCTS.find(product => product.id === productId);
+        console.log(productSelected);
+        setProduct(productSelected);
+    }, [productId])
+
     return (
-        <>
-            <Header title={product.description} />
-            <View style={orientation === "portrait" ? styles.containerVertical : styles.containerHorizontal}>
-                <Image
-                    source={{ uri: product.image }}
-                    style={styles.image}
-                    resizeMode="cover"
-                />
-                <Text style={styles.text}>{product.description}</Text>
-                <Text>$ {product.price}</Text>
-                <Button onPress={handleBack} title ='Go back'/>
-            </View>
-        </>
-    )
+			product && (
+				<>
+					
+					<View
+						style={
+							orientation === "portrait"
+								? styles.containerVertical
+								: styles.containerHorizontal
+						}
+					>
+						<Image
+							source={{ uri: product?.image }}
+							style={styles.image}
+							resizeMode="cover"
+						/>
+						<Text style={styles.text}>
+                            {product?.description}
+                            </Text>
+						<Text style={styles.text}>
+                            $ {product?.price}
+                        </Text>
+						<Button onPress={handleBack} title="Go back" />
+					</View>
+				</>
+			)
+		);
 }
 
 export default DetailScreen
@@ -49,6 +74,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems:'center',
+        backgroundColor:colors.grisMarron
     },
     containerHorizontal: {
         flex: 1,
@@ -61,5 +87,6 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize:24,
+        color:'white'
     }
 })

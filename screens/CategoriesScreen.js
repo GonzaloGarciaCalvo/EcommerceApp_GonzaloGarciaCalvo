@@ -28,12 +28,16 @@ const CategoriesScreen = ({navigation}) => {
     const handleSelectedCategory = (category) => {
         // console.log(category);
         // handleCategory(category)
-        navigation.push("Products")
+        /* navigation.push("Products") */
+        navigation.push("Products", {
+            categoryId: category.id,
+            categoryTitle: category.category,
+        })
     }
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <View style={styles.container}>
                 <Searcher additionalStyles={{
                     /* backgroundColor: "white", width:'80%', flexDirection:'row' */
