@@ -1,4 +1,4 @@
-import { Button, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
+import { Button, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard, Dimensions} from 'react-native'
 import React, { useEffect, useState } from 'react';
 import Searcher from '../Components/Searcher';
 import { Entypo } from '@expo/vector-icons';
@@ -6,6 +6,7 @@ import { PRODUCTS } from '../Data/products';
 import Header from '../Components/Header';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
+import MyButton from '../Components/MyButton';
 
 const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, route}) => {
 
@@ -79,7 +80,8 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
                     </Searcher>
                     <View style={styles.listContainer}>
                         <List data={productsFiltered} itemType={"Producto"} onPress={handleDetailProduct} />
-                        <Button title="Go back" onPress={handleBack} />
+                        {/* <Button title="Go back" onPress={handleBack}style={styles.btn} /> */}
+                        <MyButton handleBack={handleBack}/>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -99,6 +101,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         backgroundColor: colors.grisMarron,
+        /* marginBottom:50, */
+        /* height:Dimensions.get('window').height*1.2, */
     },
     input: {
         width: '75%',
@@ -112,6 +116,9 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         flex: 1,
+    },
+    btn: {
+        width:120
     }
 })
 

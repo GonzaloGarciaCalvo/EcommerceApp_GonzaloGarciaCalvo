@@ -1,6 +1,6 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import {useFonts} from 'expo-font';
-import MainNavigator from './Navigation/Shop';
+import MainNavigator from './Navigation';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 

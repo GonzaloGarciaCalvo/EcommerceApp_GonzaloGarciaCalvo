@@ -2,16 +2,16 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import CategoriesScreen from '../../Screens/CategoriesScreen';
-import ProductsScreen from '../../Screens/ProductsScreen';
-import DetailScreen from '../../Screens/DetailScreen';
-import { colors } from '../../Styles/colors';
+import CategoriesScreen from '../../../Screens/CategoriesScreen';
+import ProductsScreen from '../../../Screens/ProductsScreen';
+import DetailScreen from '../../../Screens/DetailScreen';
+import { colors } from '../../../Styles/colors';
+import Header from '../../../Components/Header';
 
 const Stack = createNativeStackNavigator();
 
-function MainNavigator() {
+function ShopNavigator() {
   return (
-    <NavigationContainer>
       <Stack.Navigator initialRouteName="Categories"
              screenOptions={{
               headerStyle: {
@@ -35,8 +35,7 @@ function MainNavigator() {
           options={
             {
               title: "Khimera Spirits",
-            }
-    
+            } 
           }
         />
         <Stack.Screen
@@ -47,6 +46,7 @@ function MainNavigator() {
             headerStyle: {
               backgroundColor: colors.colorHeader
             },
+            headerBackVisible:false,
           })
           }
         />
@@ -55,18 +55,18 @@ function MainNavigator() {
           component={DetailScreen}
           options={({ route }) => ({
             title: route.params.productTitle,
+            headerBackVisible:false,
             /* headerTintColor: colors.colorHeader, */
-/*             headerStyle: {
+            /*             headerStyle: {
               backgroundColor: colors.colorHeader
             }, */
           })
           }
         />
       </Stack.Navigator>
-    </NavigationContainer>
   )
 }
 
-export default MainNavigator;
+export default ShopNavigator;
 
 const styles = StyleSheet.create({})

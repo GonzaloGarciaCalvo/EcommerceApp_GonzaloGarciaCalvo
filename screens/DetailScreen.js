@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../Components/Header'
 import { PRODUCTS } from '../Data/products'
 import { colors } from '../Styles/colors'
+import MyButton from '../Components/MyButton';
 /* import { Route } from 'react-router-dom'; */
 
 const DetailScreen = ({ 
@@ -60,7 +61,8 @@ const DetailScreen = ({
 						<Text style={styles.text}>
                             $ {product?.price}
                         </Text>
-						<Button onPress={handleBack} title="Go back" />
+                        <MyButton handleBack={handleBack}/>
+						{/* <Button onPress={handleBack} title="Go back" /> */}
 					</View>
 				</>
 			)
