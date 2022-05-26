@@ -22,6 +22,7 @@ const List = ({ itemType = "category", data, onPress}) => {
             data={data}
             renderItem={fnRender}
             keyExtractor={item => item.id}
+            ListFooterComponent={itemType === "category" ? null:<MyButton/> }
         />
     )
 }
