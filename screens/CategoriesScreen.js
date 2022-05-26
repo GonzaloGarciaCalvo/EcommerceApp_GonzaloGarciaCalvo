@@ -6,14 +6,20 @@ import { colors } from '../Styles/colors'
 import List from '../Components/List'
 import { CATEGORIES } from '../Data/categories';
 import { Entypo } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCategory } from '../features/categories'
+import { setProductsByCategory } from '../features/products'
 
 const CategoriesScreen = ({navigation}) => {
 
     const [input, setInput] = useState("")
-    const [categoriesFilter, setCategoriesFilter] = useState(CATEGORIES)
+    const [categoriesFilter, setCategoriesFilter] = useState()
+    const {categories} = useSelector(state => state.categories.value)
+    const dispatch = useDispatch();
+    console.log(categories);
 
     useEffect(()=> {
-        if (input === "") setCategoriesFilter(CATEGORIES)
+        if (input === "") setCategoriesFilter(categories)
         else {
             console.log("Se ejecuta el efecto");
             let categoriasFiltradas = CATEGORIES.filter(category => category.category.toLowerCase().includes(input.toLowerCase()))
@@ -29,6 +35,8 @@ const CategoriesScreen = ({navigation}) => {
         // console.log(category);
         // handleCategory(category)
         /* navigation.push("Products") */
+        dispatch(setProductsByCategory(category.id))
+        dispatch(selectCategory(category.id));
         navigation.push("Products", {
             categoryId: category.id,
             categoryTitle: category.category,

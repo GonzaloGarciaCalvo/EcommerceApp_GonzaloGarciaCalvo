@@ -4,6 +4,7 @@ import Header from '../Components/Header'
 import { PRODUCTS } from '../Data/products'
 import { colors } from '../Styles/colors'
 import MyButton from '../Components/MyButton';
+import { useSelector } from 'react-redux'
 /* import { Route } from 'react-router-dom'; */
 
 const DetailScreen = ({ 
@@ -18,8 +19,9 @@ const DetailScreen = ({
         price: 39.99,
         image: "https://picsum.photos/200/300",
     }, */   
-    const {productId} = route.params
-    const [product, setProduct] = useState(null)
+    /* const {productId} = route.params
+    const [product, setProduct] = useState(null) */
+    const {productSelected} = useSelector(state => state.products.value)
     const {height, width} = useWindowDimensions();
     const [orientation, setOrientation] = useState("portrait")
 
@@ -33,14 +35,14 @@ const DetailScreen = ({
         navigation.goBack();
     }
 
-    useEffect(()=> {
+    /* useEffect(()=> {
         const productSelected = PRODUCTS.find(product => product.id === productId);
         console.log(productSelected);
         setProduct(productSelected);
-    }, [productId])
+    }, [productId]) */
 
     return (
-			product && (
+        productSelected && (
 				<>
 					
 					<View
@@ -51,15 +53,15 @@ const DetailScreen = ({
 						}
 					>
 						<Image
-							source={{ uri: product?.image }}
+							source={{ uri: productSelected?.image }}
 							style={styles.image}
 							resizeMode="cover"
 						/>
 						<Text style={styles.text}>
-                            {product?.description}
+                            {productSelected?.description}
                             </Text>
 						<Text style={styles.text}>
-                            $ {product?.price}
+                            $ {productSelected?.price}
                         </Text>
                         <MyButton handleBack={handleBack}/>
 						{/* <Button onPress={handleBack} title="Go back" /> */}

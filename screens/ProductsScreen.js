@@ -1,4 +1,4 @@
-import { Button, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard, Dimensions} from 'react-native'
+import { Button, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard, Dimensions,ScrollView  } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import Searcher from '../Components/Searcher';
 import { Entypo } from '@expo/vector-icons';
@@ -7,12 +7,17 @@ import Header from '../Components/Header';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
 import MyButton from '../Components/MyButton';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductSelected } from '../features/products';
 
 const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, route}) => {
 
     const [input, setInput] = useState("");
     const [initialProducts, setInitialProducts] = useState([])
     const [productsFiltered, setProductsFiltered] = useState([])
+    const {productsByCategory} = useSelector(state => state.products.value)
+    const dispatch = useDispatch()
 
     const {categoryId} = route.params
 
@@ -22,14 +27,14 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
 
     //Buscar productos según el input.
     useEffect(()=> {
-        if(initialProducts.length !== 0){
-            if (input === "") setProductsFiltered(initialProducts)
+        if(productsByCategory.length !== 0){
+            if (input === "") setProductsFiltered(productsByCategory)
             else {
-                const productosFiltrados = initialProducts.filter(product => product.description.toLowerCase().includes(input.toLowerCase()))
+                const productosFiltrados = productsByCategory.filter(product => product.description.toLowerCase().includes(input.toLowerCase()))
                 setProductsFiltered(productosFiltrados)
             }
         }
-    }, [input, initialProducts])
+    }, [input, productsByCategory])
 
     //Realiza el filtro inicial de productos por categoría
     useEffect(()=>{
@@ -42,10 +47,12 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
 
    
     const handleDetailProduct = (product) => {
+        dispatch(setProductSelected(product.id))
         console.log(product);
         navigation.navigate("Detail",{
-            productId: product.id,
-            productTitle: product.description
+            categoryTitle: category.category
+            /* productId: product.id,
+            productTitle: product.description */
         })
     }
 
@@ -78,8 +85,12 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
                             <Entypo name="erase" size={30} color="black" />
                         </TouchableOpacity>
                     </Searcher>
+
                     <View style={styles.listContainer}>
-                        <List data={productsFiltered} itemType={"Producto"} onPress={handleDetailProduct} />
+                        <List data={productsFiltered} 
+                            itemType={"Producto"} 
+                            onPress={handleDetailProduct} 
+                        />     
                         {/* <Button title="Go back" onPress={handleBack}style={styles.btn} /> */}
                         <MyButton handleBack={handleBack}/>
                     </View>
@@ -117,8 +128,8 @@ const styles = StyleSheet.create({
     listContainer: {
         flex: 1,
     },
-    btn: {
+    /* btn: {
         width:120
-    }
+    } */
 })
 
