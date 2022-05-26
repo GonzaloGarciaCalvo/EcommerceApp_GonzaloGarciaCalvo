@@ -81,7 +81,7 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
                     <View style={styles.listContainer}>
                         <List data={productsFiltered} itemType={"Producto"} onPress={handleDetailProduct} />
                         {/* <Button title="Go back" onPress={handleBack}style={styles.btn} /> */}
-                        <MyButton handleBack={handleBack}/>
+                        {/* <MyButton handleBack={handleBack}/> */}
                     </View>
                 </View>
             </TouchableWithoutFeedback>
