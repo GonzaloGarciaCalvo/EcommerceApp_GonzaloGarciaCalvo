@@ -2,6 +2,7 @@ import { FlatList, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'r
 import React from 'react'
 import CategoryItem from './CategoryItem'
 import ProductItem from './ProductItem'
+import MyButton from '../MyButton'
 
 const List = ({ itemType = "category", data, onPress}) => {
 
