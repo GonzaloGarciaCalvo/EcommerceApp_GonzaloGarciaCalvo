@@ -9,7 +9,6 @@ import { Provider } from 'react-redux'
 export default function App() {
 
   const [loaded] = useFonts({
-    /* Koulen: require('./assets/Fonts/Koulen/Koulen-Regular.ttf'), */
     LatoRegular: require('./assets/Fonts/Lato/Lato-Regular.ttf'),
     PoppinsRegular: require('./assets/Fonts/Poppins/Poppins-Regular.ttf'),
   });

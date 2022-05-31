@@ -5,6 +5,7 @@ export const PRODUCTS = [
         description: "Whiskey",
         price: 39.99,
         image: "https://picsum.photos/200/300",
+        stock: 22,
     },
     {
         id: 2,
@@ -18,42 +19,48 @@ export const PRODUCTS = [
         category: 1,
         description: "Gin",
         price: 19.90,
-        image: "https://picsum.photos/200/300"
+        image: "https://picsum.photos/200/300",
+        stock: 32,
     },
     {
         id: 4,
         category: 2,
         description: "Product 4",
         price: 29.99,
-        image: "https://picsum.photos/200/300"
+        image: "https://picsum.photos/200/300",
+        stock: 20,
     },
     {
         id: 5,
         category: 2,
         description: "Product 5",
         price: 15.99,
-        image: "https://picsum.photos/200/300"
+        image: "https://picsum.photos/200/300",
+        stock: 22,
     },
     {
         id: 6,
         category: 2,
         description: "Product 6",
         price: 110.25,
-        image: "https://picsum.photos/200/300"
+        image: "https://picsum.photos/200/300",
+        stock: 22,
     },
     {
         id: 7,
         category: 3,
         description: "Product 7",
         price: 10.99,
-        image: "https://picsum.photos/200/300"
+        image: "https://picsum.photos/200/300",
+        stock: 22,
     },
     {
         id: 8,
         category: 4,
         description: "Product 8",
         price: 80.63,
-        image: "https://picsum.photos/200/300"
+        image: "https://picsum.photos/200/300",
+        stock: 22,
     }
     
     /* {

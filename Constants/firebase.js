@@ -1,0 +1,1 @@
+export const DB_URL = 'https://ecommerceapp-coderhouse-default-rtdb.firebaseio.com/'

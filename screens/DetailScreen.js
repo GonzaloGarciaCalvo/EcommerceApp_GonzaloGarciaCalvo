@@ -4,23 +4,15 @@ import Header from '../Components/Header'
 import { PRODUCTS } from '../Data/products'
 import { colors } from '../Styles/colors'
 import MyButton from '../Components/MyButton';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem } from '../features/cart'
 /* import { Route } from 'react-router-dom'; */
 
 const DetailScreen = ({ 
     route,
     navigation 
 }) => {
-     /*product =
-    {
-        id: 1,
-        category: 1,
-        description: "Whiskey",
-        price: 39.99,
-        image: "https://picsum.photos/200/300",
-    }, */   
-    /* const {productId} = route.params
-    const [product, setProduct] = useState(null) */
+    const dispatch = useDispatch();
     const {productSelected} = useSelector(state => state.products.value)
     const {height, width} = useWindowDimensions();
     const [orientation, setOrientation] = useState("portrait")
@@ -29,17 +21,13 @@ const DetailScreen = ({
         setOrientation( height > width ? "portrait" : "landscape")
     }, [height, width])
 
-    // console.log(orientation);
-
     const handleBack = () => {
         navigation.goBack();
     }
 
-    /* useEffect(()=> {
-        const productSelected = PRODUCTS.find(product => product.id === productId);
-        console.log(productSelected);
-        setProduct(productSelected);
-    }, [productId]) */
+    const handleAdd = (id) => {
+        dispatch(addItem({id: id}))
+    }
 
     return (
         productSelected && (
@@ -64,6 +52,7 @@ const DetailScreen = ({
                             $ {productSelected?.price}
                         </Text>
                         <MyButton handleBack={handleBack}/>
+                        <Button onPress={()=>handleAdd(productSelected.id)} title="Add to cart" />
 						{/* <Button onPress={handleBack} title="Go back" /> */}
 					</View>
 				</>
