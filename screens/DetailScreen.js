@@ -4,7 +4,8 @@ import Header from '../Components/Header'
 import { PRODUCTS } from '../Data/products'
 import { colors } from '../Styles/colors'
 import MyButton from '../Components/MyButton';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { addItem } from '../features/cart'
 /* import { Route } from 'react-router-dom'; */
 
 const DetailScreen = ({ 
@@ -24,6 +25,7 @@ const DetailScreen = ({
     const {productSelected} = useSelector(state => state.products.value)
     const {height, width} = useWindowDimensions();
     const [orientation, setOrientation] = useState("portrait")
+    const dispatch = useDispatch();
 
     useEffect(()=> {
         setOrientation( height > width ? "portrait" : "landscape")
@@ -33,6 +35,10 @@ const DetailScreen = ({
 
     const handleBack = () => {
         navigation.goBack();
+    }
+
+    const handleAdd = (id) => {
+        dispatch(addItem({id: id}))
     }
 
     /* useEffect(()=> {
@@ -64,6 +70,7 @@ const DetailScreen = ({
                             $ {productSelected?.price}
                         </Text>
                         <MyButton handleBack={handleBack}/>
+                        <Button onPress={()=>handleAdd(productSelected.id)} title="Add to cart" />
 						{/* <Button onPress={handleBack} title="Go back" /> */}
 					</View>
 				</>

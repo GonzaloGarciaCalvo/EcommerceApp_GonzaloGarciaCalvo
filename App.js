@@ -19,11 +19,11 @@ export default function App() {
   }
 
   return (
-    //<SafeAreaView style={{ flex: 1 }}>
+  //<SafeAreaView style={{ flex: 1 }}>
     <Provider store={store}>
       <MainNavigator/>
     </Provider>
-    //</SafeAreaView>
+  //</SafeAreaView>
   );
   
   }
