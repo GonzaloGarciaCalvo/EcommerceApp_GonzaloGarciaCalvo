@@ -12,14 +12,26 @@ const DetailScreen = ({
     route,
     navigation 
 }) => {
-    const dispatch = useDispatch();
+     /*product =
+    {
+        id: 1,
+        category: 1,
+        description: "Whiskey",
+        price: 39.99,
+        image: "https://picsum.photos/200/300",
+    }, */   
+    /* const {productId} = route.params
+    const [product, setProduct] = useState(null) */
     const {productSelected} = useSelector(state => state.products.value)
     const {height, width} = useWindowDimensions();
     const [orientation, setOrientation] = useState("portrait")
+    const dispatch = useDispatch();
 
     useEffect(()=> {
         setOrientation( height > width ? "portrait" : "landscape")
     }, [height, width])
+
+    // console.log(orientation);
 
     const handleBack = () => {
         navigation.goBack();
@@ -28,6 +40,12 @@ const DetailScreen = ({
     const handleAdd = (id) => {
         dispatch(addItem({id: id}))
     }
+
+    /* useEffect(()=> {
+        const productSelected = PRODUCTS.find(product => product.id === productId);
+        console.log(productSelected);
+        setProduct(productSelected);
+    }, [productId]) */
 
     return (
         productSelected && (

@@ -4,7 +4,8 @@ import { colors } from '../Styles/colors'
 import CartItem from '../Components/CartItem'
 import { PRODUCTSSELECTED } from '../Data/productsSelected';
 import { useDispatch, useSelector } from 'react-redux';
-import { confirmPurchase } from '../features/cart';
+/* import { confirmPurchase } from '../features/cart'; */
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const handleDelete = (id) => console.log(`Se elimina del carrito el producto con id: ${id}`);
 const handleConfirm = () => console.log("Se confirma la compra");
@@ -14,23 +15,26 @@ const renderItem = (data) => (
 )
 
 const CartScreen = () => {
-
     const dispatch = useDispatch()
     const { cart } = useSelector(state => state.cart.value)
-    console.log(cart);
-    const handleConfirm = () => dispatch(confirmPurchase(cart));
-    const total = 12000;
+    console.log(" Muestro carrito  ",cart);
+
+   /*  let total; */
+    const total = cart.reduce((prev, current) =>   (prev) + (current.price*current.quantity),0)
+    console.log('cartscreen reduce  ', total)
 
     return (
         
         <View style={styles.container}>
             <View style={styles.list}>
+            
                 <FlatList
-                    data={PRODUCTSSELECTED}
+                    data={cart}
                     keyExtractor={item => item.id}
                     renderItem={renderItem}
                 />
-
+                
+                
             </View>
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.confirm} onPress={handleConfirm}>
