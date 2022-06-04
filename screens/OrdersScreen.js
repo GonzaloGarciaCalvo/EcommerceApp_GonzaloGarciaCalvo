@@ -15,7 +15,7 @@ const renderItem = ({item}) => (
 
 const OrdersScreen = () => {
 	/* const {order} = useSelector(state => state.order) */
-	console.log(ORDERS)
+	/* console.log(ORDERS) */
 	const dispatch = useDispatch()
 	useEffect(()=> {
 			dispatch(getOrders({id: 2, elemento: "Vino elemento"}))

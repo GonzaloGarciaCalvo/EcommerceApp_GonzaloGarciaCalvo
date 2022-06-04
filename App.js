@@ -16,7 +16,7 @@ export default function App() {
   if (!loaded) {
     return <ActivityIndicator/>;
   }
-
+  console.log(' ----- CORRE APP ------')
   return (
     //<SafeAreaView style={{ flex: 1 }}>
     <Provider store={store}>

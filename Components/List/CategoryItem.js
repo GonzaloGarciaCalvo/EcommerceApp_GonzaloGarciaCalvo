@@ -3,7 +3,6 @@ import React from 'react'
 import { colors } from '../../Styles/colors'
 
 const CategoryItem = ({category}) => {
-  console.log("category:  ",category)
   return (
     <View style={styles.container}>
         <Image  source={category.image} style={styles.image} />
