@@ -4,7 +4,7 @@ import OrderItem from '../Components/OrderItem'
 import { ORDERS } from '../Data/order'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { colors } from '../Styles/colors'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getOrders } from '../features/orders'
 
 const renderItem = ({item}) => (
@@ -14,9 +14,14 @@ const renderItem = ({item}) => (
 )
 
 const OrdersScreen = () => {
+	//ACTAULIZAR el screen con useEffect, navigation, routeparams?
+/* 	const {orders} = useSelector(state => state.orders.value.orders)  // no llega a orders
+	console.log("orders   ",orders) */
+	/* console.log(ORDERS) */
 	const dispatch = useDispatch()
 	useEffect(()=> {
 			dispatch(getOrders({id: 2, elemento: "Vino elemento"}))
+			
 	},[])
 
 	return (

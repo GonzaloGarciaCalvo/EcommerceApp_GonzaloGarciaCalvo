@@ -1,10 +1,10 @@
 import { Button, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { colors } from '../Styles/colors'
 import Input from '../Components/Input'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signUp } from '../features/auth'
-import { schemaEmail, schemaPassword } from '../Utils/validateSchemas'
+import { schemaEmail, schemaPassword } from '../Utils/validateSchemas' // ROMPE LA APP
 
 const LoginScreen = () => {
 
@@ -33,6 +33,17 @@ const LoginScreen = () => {
             dispatch(signUp({email: email, password: password}))
         }
     } 
+    
+    /* const { token2 } = useSelector(state => state.auth.value) */ // 
+    const { token } = useSelector(state => state.auth.value.user)
+useEffect(() => {
+ 
+    setTimeout(()=>console.log("Token en authScreen:  ",token),4000) //UNDEFINED
+  console.log('registroVista:  ',registroVista)
+}, [token])
+
+
+   
  
     return (
         <View style={styles.container}>

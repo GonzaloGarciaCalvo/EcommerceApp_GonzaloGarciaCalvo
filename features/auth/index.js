@@ -6,7 +6,7 @@ const initialState = {
         user: {
             userId: "",
             email: "",
-            token: ""
+            token: " "  // si hay token entrar a la app
         },
         loading: false,
         error: "",
@@ -19,18 +19,19 @@ export const signUp = createAsyncThunk(
         // console.log(_);
         // console.log(asyncThunk.getState());
         try {
-           const res = await fetch (`${AUTH_SIGNUP}`, {
-               method: 'POST',
-               body: JSON.stringify({
-                   email: emailAndPassword.email,
-                   password: emailAndPassword.password,
-                   returnSecureToken: true,
-               })
-           });
-           const data = await res.json()
-           console.log(data);
-           return data
-        } catch (error) {
+            const res = await fetch (`${AUTH_SIGNUP}`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: emailAndPassword.email,
+                    password: emailAndPassword.password,
+                    returnSecureToken: true,
+                })
+            });
+            const data = await res.json()
+            console.log(data);
+            return data
+        }
+        catch (error) {
             return rejectWithValue('Opps there seems to be an error')
         }
     }
@@ -39,9 +40,7 @@ export const signUp = createAsyncThunk(
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: {
         [signUp.pending]: (state) => {
             state.value.loading = true
@@ -56,6 +55,7 @@ export const authSlice = createSlice({
             state.value.user.userId = payload.localId
             state.value.user.email = payload.email
             state.value.user.token = payload.idToken
+            /* console.log("TOKEN: ",state.value.user.token ) */
         },
         [signUp.rejected]: (state) => {
             state.value.loading = false

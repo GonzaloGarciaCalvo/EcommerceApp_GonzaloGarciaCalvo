@@ -4,38 +4,50 @@ import { colors } from '../Styles/colors'
 import CartItem from '../Components/CartItem'
 import { PRODUCTSSELECTED } from '../Data/productsSelected';
 import { useDispatch, useSelector } from 'react-redux';
+import { removeItem } from '../features/cart'
+
 /* import { confirmPurchase } from '../features/cart'; */
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const handleDelete = (id) => console.log(`Se elimina del carrito el producto con id: ${id}`);
+/* const handleDelete = (id) => {
+    console.log(`Se elimina del carrito el producto con id: ${id}`);
+    dispatch(removeItem(id))
+} */
 const handleConfirm = () => console.log("Se confirma la compra");
 
-const renderItem = (data) => (
+/* const renderItem = (data) => (
     <CartItem item={data.item} onDelete={handleDelete} />
-)
+) */
 
 const CartScreen = () => {
     const dispatch = useDispatch()
     const { cart } = useSelector(state => state.cart.value)
-    console.log(cart);
-
-    /* const total = 12000; */
-    const total = cart.reduce((prev, current) => (prev.price*prev.quantity) + (current.price*current.quantity),0)
-    console.log('reduce  ', total)
+    /* console.log(" Muestro carrito  ",cart); */
+    const handleDelete = (id) => { 
+        dispatch(removeItem({id: id}))
+        /* console.log(`Se elimina del carrito el producto con id: ${id}`); */
+    }
+    
+    const renderItem = (data) => (
+        <CartItem item={data.item} onDelete={handleDelete} />
+    )
+   /*  let total; */
+    const total = cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
+    /* console.log('cartscreen reduce  ', total) */
 
     return (
         
         <View style={styles.container}>
-            <View style={styles.list}>
-            
+    {cart?
+            <View style={styles.list}>     
                 <FlatList
                     data={cart}
                     keyExtractor={item => item.id}
                     renderItem={renderItem}
                 />
-                
-                
             </View>
+       : null     
+    }
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.confirm} onPress={handleConfirm}>
                     <Text>Confirmar</Text>
@@ -46,7 +58,8 @@ const CartScreen = () => {
                 </TouchableOpacity>
             </View>
         </View>
-       
+        
+
     )
 }
 

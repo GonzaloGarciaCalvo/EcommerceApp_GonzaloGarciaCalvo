@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { DB_URL } from "../../Constants/firebase";
+import { DB_URL} from "../../Constants/firebase"
 import { PRODUCTS } from "../../Data/products";
-// import store from "../../Store";
 
 const initialState = {
     value: {
@@ -42,20 +41,43 @@ const cartSlice = createSlice({
         addItem: (state, action) => {
             // console.log(state.value.products);
             const productoRepetido = state.value.cart.find(producto => producto.id === action.payload.id)
-            console.log(productoRepetido);
+            /* console.log('producto repetido',productoRepetido); */
             if (productoRepetido) {
                 state.value.cart.map(item => {
                     if (item.id === action.payload.id) item.quantity++
                     return item
                 })
-
             }
             else {
                 const producto = PRODUCTS.find(producto => producto.id === action.payload.id);
                 state.value.cart.push({ ...producto, quantity: 1 })
             }
         },
-        removeItem: () => { },
+        removeItem: (state, action) => {
+            const productoamodificar = state.value.cart.find(producto => producto.id === action.payload.id)
+            
+            if (productoamodificar.quantity >1) {
+                console.log('producto repetido antes de romover item',productoamodificar);
+                state.value.cart.map(item => {
+                    if (item.id === action.payload.id) item.quantity--
+                    return item
+                })
+            }
+            else if (productoamodificar.quantity = 1 || !productoamodificar) {
+                /* no funciona */
+                
+                state.value.cart.filter(producto => producto.id !== action.payload.id);
+                let aux =state.value.cart.filter(producto => producto.id !== action.payload.id)
+                /* El filter no funciona, queda el elemento con quantity=0 */
+                state.value.cart.map(item => {
+                    if (item.id === action.payload.id) item.quantity--
+                    return item
+                })
+                console.log('aux  ', aux)//aca remueve el item, en cart no
+                console.log('se deberia remover item del carrito')
+                console.log(state.value.cart, "  cart en el else")
+            }
+        },
     },
     extraReducers: {
         [confirmPurchase.pending]: (state) => {

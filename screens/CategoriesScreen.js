@@ -16,12 +16,12 @@ const CategoriesScreen = ({navigation}) => {
     const [categoriesFilter, setCategoriesFilter] = useState()
     const {categories} = useSelector(state => state.categories.value)
     const dispatch = useDispatch();
-    console.log(categories);
+    /* console.log(categories); */
 
     useEffect(()=> {
         if (input === "") setCategoriesFilter(categories)
         else {
-            console.log("Se ejecuta el efecto");
+            /* console.log("Se ejecuta el efecto"); */
             let categoriasFiltradas = CATEGORIES.filter(category => category.category.toLowerCase().includes(input.toLowerCase()))
             setCategoriesFilter(categoriasFiltradas)
         }
