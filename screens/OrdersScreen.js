@@ -14,11 +14,14 @@ const renderItem = ({item}) => (
 )
 
 const OrdersScreen = () => {
-	/* const {order} = useSelector(state => state.order) */
+	//ACTAULIZAR el screen con useEffect, navigation, routeparams?
+/* 	const {orders} = useSelector(state => state.orders.value.orders)  // no llega a orders
+	console.log("orders   ",orders) */
 	/* console.log(ORDERS) */
 	const dispatch = useDispatch()
 	useEffect(()=> {
 			dispatch(getOrders({id: 2, elemento: "Vino elemento"}))
+			
 	},[])
 
 	return (
