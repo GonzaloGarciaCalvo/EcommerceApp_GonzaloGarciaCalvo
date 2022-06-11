@@ -5,11 +5,15 @@ import * as ImagePicker from 'expo-image-picker';
 import renamePathAndMove from '../Utils/renamePath';
 import { useDispatch } from 'react-redux';
 import {addLocation} from '../features/locations'
+import LocationButton from '../Components/LacationButton';
 
 
-const SaveLocationScreen = () => {
+const SaveLocationScreen = ({navigation, route}) => {
   const [title, setTitle] = React.useState("")
   const [picture, setPicture] = React.useState("")
+
+  const params = route.params;
+  console.log(params?.address);
 
   const dispatch = useDispatch();
 
@@ -58,9 +62,17 @@ const SaveLocationScreen = () => {
   const handleConfirm = async () => {
     // const path = await renamePathAndMove(picture);
     // console.log(path);
-    dispatch(addLocation({title, picture, id: Date.now()}))
+    dispatch(addLocation({title, picture, id: Date.now(), address:params?.address}))
     setTitle("");
     setPicture("");
+  }
+
+  const handleSetLocation = () => {
+    navigation.navigate("Set-location");
+  }
+ 
+  const handleLocation = () => {
+    navigation.navigate("Get-location")
   }
 
   return (
@@ -70,6 +82,7 @@ const SaveLocationScreen = () => {
         value={title}
         onChangeText={setTitle}
         placeholder="Título"
+        style={styles.title}
       />
       {picture ?
         <Image
@@ -78,9 +91,12 @@ const SaveLocationScreen = () => {
         />
         : null
       }
-      <Button title='Tomar una foto' onPress={handleTakePicture} />
-      <Button title="Seleccionar de la galería" onPress={handlePickLibrary} />
-      <Button title="Confirmar" onPress={handleConfirm}></Button>
+      {/* <Button title='Tomar una foto' onPress={handleTakePicture}  /> */}
+      <LocationButton  title='Tomar una foto' onPress={handleTakePicture}/>
+      <LocationButton title="Seleccionar de la galería" onPress={handlePickLibrary} />
+      <LocationButton title="Obtener ubicación" onPress={handleLocation} />
+      <LocationButton title="Definir una ubicación" onPress={handleSetLocation}/> 
+      <LocationButton title="Confirmar" onPress={handleConfirm}/>
     </View>
   )
 }
@@ -101,5 +117,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 8,
     borderColor: colors.lightBlue,
+  },
+  title:{
+    fontSize:20
   }
 })
