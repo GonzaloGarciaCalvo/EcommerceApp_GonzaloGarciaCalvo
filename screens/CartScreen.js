@@ -5,6 +5,7 @@ import CartItem from '../Components/CartItem'
 import { PRODUCTSSELECTED } from '../Data/productsSelected';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../features/cart'
+import { confirmPurchase } from '../features/cart';
 
 /* import { confirmPurchase } from '../features/cart'; */
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -28,6 +29,9 @@ const CartScreen = () => {
         /* console.log(`Se elimina del carrito el producto con id: ${id}`); */
     }
     
+    const handleConfirm = () => {
+        dispatch(confirmPurchase(cart))
+    };
     const renderItem = (data) => (
         <CartItem item={data.item} onDelete={handleDelete} />
     )

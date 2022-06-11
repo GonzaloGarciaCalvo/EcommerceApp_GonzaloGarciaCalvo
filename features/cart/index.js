@@ -22,6 +22,7 @@ export const confirmPurchase = createAsyncThunk(
                     body: JSON.stringify({
                         date: new Date().toLocaleDateString(),
                         items: items,
+                        /* poner user.id para identificar orden con usuario */
                     })
                 }
     

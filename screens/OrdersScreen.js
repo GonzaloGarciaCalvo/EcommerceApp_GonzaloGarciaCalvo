@@ -15,19 +15,24 @@ const renderItem = ({item}) => (
 
 const OrdersScreen = () => {
 	//ACTAULIZAR el screen con useEffect, navigation, routeparams?
-/* 	const {orders} = useSelector(state => state.orders.value.orders)  // no llega a orders
-	console.log("orders   ",orders) */
+	const {orders} = useSelector(state => state.orders.value)  // no llega a orders
+	console.log("orders en OrderScreen  ",orders)
+	orders.forEach(element => {
+		console.log("order item", element.item)
+	});
 	/* console.log(ORDERS) */
 	const dispatch = useDispatch()
 	useEffect(()=> {
 			dispatch(getOrders({id: 2, elemento: "Vino elemento"}))
-			
+			orders.forEach(element => {
+				console.log("order item", element.item)
+			});
 	},[])
 
 	return (
 			<View style={styles.container}>
 				<FlatList
-					data={ORDERS}
+					data={orders}
 					keyExtractor={(item) => item.id}
 					renderItem={renderItem}
 				/>

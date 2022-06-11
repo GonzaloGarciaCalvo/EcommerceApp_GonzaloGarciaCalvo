@@ -11,11 +11,11 @@ const initialState = {
 
 export const getOrders = createAsyncThunk(
     'orders/getOrders',
-    async (asyncThunk) => {
+    async (_,asyncThunk) => {
         try {
            const res = await fetch (`${DB_URL}orders.json`);
            const data = Object.values( await res.json()) 
-           console.log(data);
+           console.log("data de getOrders",data);
            return data
         } catch (error) {
             return rejectWithValue('Opps there seems to be an error')

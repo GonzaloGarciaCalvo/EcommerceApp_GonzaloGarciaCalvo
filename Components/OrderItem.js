@@ -8,14 +8,14 @@ const formatDay = (time) => {
 }
 
 const OrderItem = ({item}) => {
-  return (
-    <View style={styles.order}>
-        <View>
-            <Text style={styles.date}>{formatDay(item.date)}</Text>
-            <Text style={styles.total}>${item.total}</Text>
+    return (
+        <View style={styles.order}>
+            <View>
+                <Text style={styles.date}>{formatDay(item.date)}</Text>
+                <Text style={styles.total}>${item.total}</Text>
+            </View>
         </View>
-    </View>
-  )
+    )
 }
 
 export default OrderItem
