@@ -13,6 +13,7 @@ const OrderItem = ({item}) => {
             <View>
                 <Text style={styles.date}>{formatDay(item.date)}</Text>
                 <Text style={styles.total}>${item.total}</Text>
+                <Text>{item.id}</Text>
             </View>
         </View>
     )

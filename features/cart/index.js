@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { ImagePropTypes } from "react-native";
 import { DB_URL} from "../../Constants/firebase"
 import { PRODUCTS } from "../../Data/products";
 
@@ -22,6 +23,8 @@ export const confirmPurchase = createAsyncThunk(
                     body: JSON.stringify({
                         date: new Date().toLocaleDateString(),
                         items: items,
+                        id: Date.now(),
+                        importeTotal: importeTotal,
                         /* poner user.id para identificar orden con usuario */
                     })
                 }
@@ -30,7 +33,9 @@ export const confirmPurchase = createAsyncThunk(
             const data = res.json();
             return data;
         } catch (error) {
+            console.log('error en carga')
             return rejectWithValue('Opps there seems to be an error')
+            
         }
     }
 )
@@ -64,25 +69,25 @@ const cartSlice = createSlice({
                     return item
                 })
             }
-            else if (productoamodificar.quantity = 1 || !productoamodificar) {
-                /* no funciona */
-                
-                state.value.cart.filter(producto => producto.id !== action.payload.id);
+            else if (productoamodificar.quantity = 1) {
+
                 let aux =state.value.cart.filter(producto => producto.id !== action.payload.id)
-                /* El filter no funciona, queda el elemento con quantity=0 */
-                state.value.cart.map(item => {
-                    if (item.id === action.payload.id) item.quantity--
-                    return item
-                })
-                console.log('aux  ', aux)//aca remueve el item, en cart no
-                console.log('se deberia remover item del carrito')
-                console.log(state.value.cart, "  cart en el else")
+                state.value.cart = aux
+                /* ****************************************************************
+                ERROR
+                AL BORRAR ELEMENTO DEL CARRITO, DETAIL QUEDA como primer stack y 
+                ********************************************************************/
+                console.log("  cart en el else  ", state.value.cart)
             }
         },
+        calcularTotal: (state,action) =>{
+            const importeTotal = state.value.cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
+        }
     },
     extraReducers: {
         [confirmPurchase.pending]: (state) => {
             state.value.loading = true
+
         },
         [confirmPurchase.fulfilled]: (state, {payload}) => {
             state.value.response = payload
@@ -91,6 +96,7 @@ const cartSlice = createSlice({
         [confirmPurchase.rejected]: (state) => {
             state.value.loading = false
             state.value.error = true
+            console.log("fallo la compra")
         }
     }
 })

@@ -77,12 +77,13 @@ const SaveLocationScreen = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      <Text>Nueva dirección</Text>
+      <Text style={{color:'white'}}>Nueva dirección</Text>
       <TextInput
         value={title}
         onChangeText={setTitle}
         placeholder="Título"
-        style={styles.title}
+        placeholderTextColor="white"
+        
       />
       {picture ?
         <Image
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: colors.beige
+    backgroundColor: colors.grisMarron,
   },
   image: {
     width: '90%',
@@ -118,7 +119,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: colors.lightBlue,
   },
-  title:{
-    fontSize:20
+  titleLocation:{
+    color:'white',
+    
+    fontSize:36,
+    marginBottom:15,
   }
 })

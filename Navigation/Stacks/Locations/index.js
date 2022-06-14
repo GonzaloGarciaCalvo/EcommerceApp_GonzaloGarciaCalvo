@@ -16,11 +16,11 @@ const LocationStack = () => {
     <Stack.Navigator initialRouteName=""
         screenOptions={{
           headerStyle: {
-            backgroundColor: colors.darkBlue
+            backgroundColor: colors.colorHeader
           },
           headerTintColor: "white",
           headerTitleStyle: {
-            fontFamily: "Koulen",
+            fontFamily: "PoppinsRegular",
             fontSize: 28,
           },
           headerTitleAlign: "center",
@@ -38,7 +38,7 @@ const LocationStack = () => {
             headerRight: () => {
                 return(
                     <TouchableOpacity onPress={()=> navigation.navigate("Save-location")}>
-                        <Ionicons name="add-circle-outline" size={24} color="black" />
+                        <Ionicons name="add-circle-outline" size={24} color="white" />
                     </TouchableOpacity>
                 )
             }

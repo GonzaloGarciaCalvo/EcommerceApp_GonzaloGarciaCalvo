@@ -35,7 +35,6 @@ const CartScreen = () => {
     const renderItem = (data) => (
         <CartItem item={data.item} onDelete={handleDelete} />
     )
-   /*  let total; */
     const total = cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
     /* console.log('cartscreen reduce  ', total) */
 

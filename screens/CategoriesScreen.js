@@ -56,6 +56,8 @@ const CategoriesScreen = ({navigation}) => {
                         onChangeText={setInput}
                         keyboardType="default"
                         style={styles.input}
+                        placeholder="Buscar producto"
+                        placeholderTextColor="white"
                     />
                     <TouchableOpacity onPress={handleErase} style={styles.touchable}>
                         <Entypo name="eraser" size={24} color="black"  />
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         borderRadius: 8,
         color: 'white',
-        
+        textAlign:'center'
     },
     listContainer:{
         flex: 1,
