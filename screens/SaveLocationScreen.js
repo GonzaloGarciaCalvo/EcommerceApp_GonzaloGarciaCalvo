@@ -1,5 +1,5 @@
 import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import { colors } from '../Styles/colors';
 import * as ImagePicker from 'expo-image-picker';
 import renamePathAndMove from '../Utils/renamePath';
@@ -11,7 +11,7 @@ import LocationButton from '../Components/LacationButton';
 const SaveLocationScreen = ({navigation, route}) => {
   const [title, setTitle] = React.useState("")
   const [picture, setPicture] = React.useState("")
-
+  const [errorMsg, setErrorMsg] = useState(null);
   const params = route.params;
   console.log(params?.address);
 
@@ -35,9 +35,9 @@ const SaveLocationScreen = ({navigation, route}) => {
 
   const getPermission = async () => {
     const { status } = await ImagePicker.getCameraPermissionsAsync()
-
-    console.log(status);
+    console.log('status del permiso de camara',status);
     if (status !== 'granted') {
+      setErrorMsg('Permission to access location was denied');
       return false
     }
     return true

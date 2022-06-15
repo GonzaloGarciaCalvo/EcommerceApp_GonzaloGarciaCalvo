@@ -5,7 +5,7 @@ export default function MyButton({handleBack}) {
   return (
 		<TouchableOpacity onPress={handleBack} style={styles.touchable}>
 			<View>
-				<Text style={styles.text}>GO BACK</Text>
+				<Text style={styles.text}>Go Back</Text>
 			</View>
 		</TouchableOpacity>
 	);
@@ -14,10 +14,9 @@ export default function MyButton({handleBack}) {
 const styles = StyleSheet.create({
     touchable:{
         width:120,
-        height:40,
-        /* backgroundColor:'#0033CC', */
-        /* backgroundColor:'#0d47a1', */
-        backgroundColor:'#1565c0',
+        height:35,
+        /* backgroundColor:'#1565c0', */
+        backgroundColor:'#2E9AFE',
         borderRadius:4,
         alignSelf:'center',
         justifyContent:'center',

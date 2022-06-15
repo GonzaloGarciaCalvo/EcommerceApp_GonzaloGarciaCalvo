@@ -21,7 +21,7 @@ const LocationStack = () => {
           headerTintColor: "white",
           headerTitleStyle: {
             fontFamily: "PoppinsRegular",
-            fontSize: 28,
+            fontSize: 26,
           },
           headerTitleAlign: "center",
           // headerTransparent: true,
@@ -51,8 +51,10 @@ const LocationStack = () => {
             component={SaveLocationScreen}
             options={
                 {
-                    title: "Guardar dirección"
+                    title: "Save directions",
+                    headerBackVisible:false,
                 }
+                
             }
         />
 
@@ -61,7 +63,7 @@ const LocationStack = () => {
         component={GetLocationScreen}
         options={
           {
-            title: "Obtener ubicación"
+            title: "Get location"
           }
         }
       />

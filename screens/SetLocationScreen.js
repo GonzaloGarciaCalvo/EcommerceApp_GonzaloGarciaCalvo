@@ -49,7 +49,6 @@ const SetLocationScreen = ({navigation}) => {
     console.log(location);
 
     return (
-        // <View>
         <>
             {errorMsg ?
                 <Text>{errorMsg}</Text>
@@ -75,7 +74,6 @@ const SetLocationScreen = ({navigation}) => {
                     <Button title="Confirmar ubicación" onPress={handleConfirm}></Button>
                 </>
             }
-            {/* </View> */}
         </>
     )
 }

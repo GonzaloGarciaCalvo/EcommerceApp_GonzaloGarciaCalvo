@@ -4,24 +4,15 @@ import Header from '../Components/Header'
 import { PRODUCTS } from '../Data/products'
 import { colors } from '../Styles/colors'
 import MyButton from '../Components/MyButton';
+import LocationButton from '../Components/LacationButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../features/cart'
-/* import { Route } from 'react-router-dom'; */
 
 const DetailScreen = ({ 
     route,
     navigation 
 }) => {
-     /*product =
-    {
-        id: 1,
-        category: 1,
-        description: "Whiskey",
-        price: 39.99,
-        image: "https://picsum.photos/200/300",
-    }, */   
-    /* const {productId} = route.params
-    const [product, setProduct] = useState(null) */
+
     const {productSelected} = useSelector(state => state.products.value)
     const {height, width} = useWindowDimensions();
     const [orientation, setOrientation] = useState("portrait")
@@ -31,8 +22,6 @@ const DetailScreen = ({
         setOrientation( height > width ? "portrait" : "landscape")
     }, [height, width])
 
-    // console.log(orientation);
-
     const handleBack = () => {
         navigation.goBack();
     }
@@ -40,12 +29,6 @@ const DetailScreen = ({
     const handleAdd = (id) => {
         dispatch(addItem({id: id}))
     }
-
-    /* useEffect(()=> {
-        const productSelected = PRODUCTS.find(product => product.id === productId);
-        console.log(productSelected);
-        setProduct(productSelected);
-    }, [productId]) */
 
     return (
         productSelected && (
@@ -69,8 +52,13 @@ const DetailScreen = ({
 						<Text style={styles.text}>
                             $ {productSelected?.price}
                         </Text>
+                       {/*  <Button onPress={()=>handleAdd(productSelected.id)} title="Add to cart" /> */}
+                        <LocationButton 
+                            onPress={()=>handleAdd(productSelected.id)} 
+                            title="Add to cart" 
+                            additionalStyles={{width:120}}
+                        />
                         <MyButton handleBack={handleBack}/>
-                        <Button onPress={()=>handleAdd(productSelected.id)} title="Add to cart" />
 						{/* <Button onPress={handleBack} title="Go back" /> */}
 					</View>
 				</>

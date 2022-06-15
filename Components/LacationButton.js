@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-export default function LocationButton({onPress, title}) {
+export default function LocationButton({onPress, title, additionalStyles}) {
   return (
-		<TouchableOpacity onPress={onPress} style={styles.touchable}>
+		<TouchableOpacity onPress={onPress} style={{...styles.touchable, ...additionalStyles}}>
 			<View>
 				<Text style={styles.text}>{title}</Text>
 			</View>

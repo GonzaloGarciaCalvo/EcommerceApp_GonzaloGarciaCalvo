@@ -56,7 +56,7 @@ const TabNavigatorLogged = () => {
             return (
               <View style={styles.item}>
                 <Feather name="list" size={24} color="black" />
-                <Text>Ordenes</Text>
+                <Text>Orders</Text>
               </View>
             )
           }
@@ -70,7 +70,7 @@ const TabNavigatorLogged = () => {
             return (
               <View style={styles.item}>
                 <Entypo name="location" size={24} color="black" />
-                <Text>Direcciones</Text>
+                <Text>Directions</Text>
               </View>
             )
           }

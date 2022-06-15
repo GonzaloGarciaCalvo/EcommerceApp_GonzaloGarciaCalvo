@@ -4,7 +4,7 @@ import CategoryItem from './CategoryItem'
 import ProductItem from './ProductItem'
 import MyButton from '../MyButton'
 
-const List = ({ itemType = "category", data, onPress}) => {
+const List = ({ itemType = "category", data, onPress, navigation}) => {
 
     const fnRender = ({item}) => {
         return(
@@ -23,7 +23,7 @@ const List = ({ itemType = "category", data, onPress}) => {
             data={data}
             renderItem={fnRender}
             keyExtractor={item => item.id}
-            ListFooterComponent={itemType === "category" ? null:<MyButton/> }
+            /* ListFooterComponent={itemType === "category" ? null:<MyButton/> } */
         />
     )
 }

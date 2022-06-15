@@ -6,27 +6,15 @@ import { PRODUCTSSELECTED } from '../Data/productsSelected';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../features/cart'
 import { confirmPurchase } from '../features/cart';
-
-/* import { confirmPurchase } from '../features/cart'; */
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-/* const handleDelete = (id) => {
-    console.log(`Se elimina del carrito el producto con id: ${id}`);
-    dispatch(removeItem(id))
-} */
 const handleConfirm = () => console.log("Se confirma la compra");
 
-/* const renderItem = (data) => (
-    <CartItem item={data.item} onDelete={handleDelete} />
-) */
-
-const CartScreen = () => {
+const CartScreen = ({navigation}) => {
     const dispatch = useDispatch()
     const { cart } = useSelector(state => state.cart.value)
-    /* console.log(" Muestro carrito  ",cart); */
     const handleDelete = (id) => { 
         dispatch(removeItem({id: id}))
-        /* console.log(`Se elimina del carrito el producto con id: ${id}`); */
     }
     
     const handleConfirm = () => {
@@ -36,7 +24,6 @@ const CartScreen = () => {
         <CartItem item={data.item} onDelete={handleDelete} />
     )
     const total = cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
-    /* console.log('cartscreen reduce  ', total) */
 
     return (
         

@@ -36,8 +36,3 @@ const styles = StyleSheet.create({
     }
 })
 
-
-{/* <View style={{...styles.searcherContainer, ...additionalStyles}}>
-            
-            {children}
-        </View> */}

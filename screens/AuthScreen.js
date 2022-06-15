@@ -5,32 +5,16 @@ import Input from '../Components/Input'
 import { useDispatch } from 'react-redux'
 import { login, signUp } from '../features/auth'
 import loginValidationSchema from '../Utils/validationYup'
-// import { schemaEmail, schemaPassword } from '../Utils/validateSchemas'
 import {Formik} from 'formik';
 const LoginScreen = () => {
 
     const [registroVista, setRegistroVista] = useState(false)
-    // const [email, setEmail] = useState("");
-    // const [emailError, setEmailError] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [passwordError, setPasswordError] = useState("")
-    // const [confirmPassword, setConfirmPassword] = useState("");
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
     const dispatch = useDispatch()
 
     const handleSignup = () => {
 
-        /* const validateEmail = schemaEmail.validate({ email: email })
-
-        const validatePassword = schemaPassword.validate({ password: password })
-
-        console.log(validateEmail);
-        console.log(validatePassword)
-
-        if (validateEmail.error) setEmailError(validateEmail.error.message)
-        else if (validatePassword.error) setPasswordError(validatePassword.error.message)
-        else { */
             setEmailError("")
             setPasswordError("")
             if (password === confirmPassword) {
@@ -47,18 +31,6 @@ const LoginScreen = () => {
 
         const validateEmailAndPassword = loginValidationSchema.validate({email, password})
         console.log(validateEmailAndPassword);
-
-        /* const validateEmail = schemaEmail.validate({ email: email })
-        const validatePassword = schemaPassword.validate({ password: password })
-
-        if (validateEmail.error) setEmailError(validateEmail.error.message)
-        else if (validatePassword.error) setPasswordError(validatePassword.error.message)
-        else {
-            setEmailError("");
-            setPasswordError("");
-            console.log("Se registra!");
-            dispatch(login({ email: email, password: password }));
-        } */
     }
 
     const handleSubmit = (values) => {
@@ -107,8 +79,7 @@ const LoginScreen = () => {
                                         >Login</Text></Text>
                                     </TouchableOpacity>
                                     :
-                                    <TouchableOpacity onPress={() => setRegistroVista(true)}
-                                    >
+                                    <TouchableOpacity onPress={() => setRegistroVista(true)}>
                                         <Text>¿No tienes cuenta? <Text
                                             style={styles.link}
                                         >¡Crea una!</Text></Text>
@@ -148,7 +119,7 @@ const styles = StyleSheet.create({
         elevation: 12,
     },
     title: {
-        fontFamily: 'LatoRegular',
+        fontFamily: 'PoppinsRegular',
         fontSize: 24,
         textAlign: 'center'
     },

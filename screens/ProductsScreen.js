@@ -92,7 +92,7 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
                             onPress={handleDetailProduct} 
                         />     
                         {/* <Button title="Go back" onPress={handleBack}style={styles.btn} /> */}
-                        {/* <MyButton handleBack={handleBack}/> */}
+                        <MyButton handleBack={handleBack}/>
                     </View>
                 </View>
             </TouchableWithoutFeedback>

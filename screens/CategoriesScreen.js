@@ -32,9 +32,7 @@ const CategoriesScreen = ({navigation}) => {
     }
 
     const handleSelectedCategory = (category) => {
-        // console.log(category);
-        // handleCategory(category)
-        /* navigation.push("Products") */
+
         dispatch(setProductsByCategory(category.id))
         dispatch(selectCategory(category.id));
         navigation.push("Products", {

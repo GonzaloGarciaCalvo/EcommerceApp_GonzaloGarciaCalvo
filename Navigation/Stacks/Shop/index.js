@@ -20,7 +20,7 @@ function ShopNavigator() {
               headerTintColor: "white",
               headerTitleStyle: {
                 fontFamily: "PoppinsRegular",
-                fontSize: 28,
+                fontSize: 26,
               },
               headerTitleAlign: "center",
               // headerTransparent: true,
