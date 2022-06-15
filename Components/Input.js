@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start'
     },
     input: {
-        color: colors.beige,
-        backgroundColor: colors.darkBlue,
+        color: 'white',
+        backgroundColor: 'black',
         borderBottomWidth: 2,
         borderBottomColor: colors.beige,
         padding: 6,

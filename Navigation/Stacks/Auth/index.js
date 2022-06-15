@@ -11,11 +11,11 @@ const AuthStack = () => {
     <Stack.Navigator initialRouteName=""
         screenOptions={{
           headerStyle: {
-            backgroundColor: colors.darkBlue
+            backgroundColor: colors.colorHeader
           },
           headerTintColor: "white",
           headerTitleStyle: {
-            fontFamily: "Koulen",
+            fontFamily: "PoppinsRegular",
             fontSize: 26,
           },
           headerTitleAlign: "center",

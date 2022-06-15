@@ -63,7 +63,7 @@ const LoginScreen = () => {
                 >   
                     {({handleChange, errors, handleSubmit, values, handleBlur}) => (
                         <>
-                            <Input label="Email" password={false} onChange={handleChange('email')} value={values.email} error={errors.email} onBlur={handleBlur('email')}/>
+                            <Input label="Email" password={false} onChange={handleChange('email')} value={values.email} error={errors.email} onBlur={handleBlur('email')} />
                             <Input label="Password" password={true} onChange={handleChange('password')} value={values.password} error={errors.password} onBlur={handleBlur('password')}/>
                             {registroVista && <Input label="Confirm password" password={true} onChange={handleChange('confirmPassword')} value={values.confirmPassword} onBlur={handleBlur('confirmPassword')} error={confirmPasswordError}/>}
                             {registroVista ?
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.beige
+        backgroundColor: colors.grisMarron
     },
     content: {
-        backgroundColor: colors.darkBlue,
+        backgroundColor:'white',
         padding: 20,
         justifyContent: 'center',
-        borderRadius: 10,
+        borderRadius: 6,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -132,5 +132,8 @@ const styles = StyleSheet.create({
     link: {
         color: colors.lightBlue,
         textDecorationLine: "underline"
+    },
+    input:{
+        backgroundColor:'black'
     }
 })
