@@ -49,7 +49,7 @@ const CartScreen = ({navigation}) => {
             </View>
         </View>
         
-
+    //state.cart.value.response? => mostrar modal con orden de compra
     )
 }
 

@@ -16,18 +16,22 @@ const GetLocationScreen = ({navigation}) => {
   useEffect(() => {
     //IIFE
     (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
+      try {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          return;
+        }
+        console.log("Trata de obtener location");
+        let location = await Location.getCurrentPositionAsync({});
+        console.log(location);
+        setLocation({
+          lat: location.coords.latitude,
+          lng: location.coords.longitude,
+        })
+      } catch (error) {
+        console.log(error.message);
       }
-      let location = await Location.getCurrentPositionAsync({});
-
-      // console.log(location);
-      setLocation({
-        lat: location.coords.latitude,
-        lng: location.coords.longitude,
-      })
     })();
 
   }, []);
@@ -63,6 +67,8 @@ const GetLocationScreen = ({navigation}) => {
   const handleConfirmLocation = () => {
     navigation.navigate("Save-location", {address})
   }
+
+  console.log(location);
 
   return (
     <View style={styles.container}>

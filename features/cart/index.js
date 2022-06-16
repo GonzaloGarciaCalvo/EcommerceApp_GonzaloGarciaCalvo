@@ -2,8 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ImagePropTypes } from "react-native";
 import { DB_URL} from "../../Constants/firebase"
 import { PRODUCTS } from "../../Data/products";
+import { useDispatch, useSelector } from 'react-redux';
 
-const initialState = {
+
+
+/* const user = useSelector(state => state.auth.value.user.userId) */
+
+const initialState = {  
     value: {
         cart: [],
         response: {},
@@ -14,7 +19,8 @@ const initialState = {
 
 export const confirmPurchase = createAsyncThunk(
     'cart/confirm',
-    async (items, asyncThunk) => {
+    async (items, importeTotal, asyncThunk) => {
+
         try {
             const res = await fetch(
                 `${DB_URL}orders.json`,
@@ -24,8 +30,11 @@ export const confirmPurchase = createAsyncThunk(
                         date: new Date().toLocaleDateString(),
                         items: items,
                         id: Date.now(),
-                        importeTotal: importeTotal,
-                        /* poner user.id para identificar orden con usuario */
+                        /* importeTotal: importeTotal, */
+                        /* importeTotal: dispatch(calcularTotal) */ //MAL
+                        /* user:user, */
+                        /* para identificar orden con usuario
+                         */
                     })
                 }
     
@@ -77,7 +86,6 @@ const cartSlice = createSlice({
                 ERROR
                 AL BORRAR ELEMENTO DEL CARRITO, DETAIL QUEDA como primer stack y 
                 ********************************************************************/
-                console.log("  cart en el else  ", state.value.cart)
             }
         },
         calcularTotal: (state,action) =>{
@@ -92,6 +100,7 @@ const cartSlice = createSlice({
         [confirmPurchase.fulfilled]: (state, {payload}) => {
             state.value.response = payload
             state.value.loading = false
+            console.log('respuesta de firebase ', state.value.response) //Object {"name": "-N4iXnTA9U9EgJ5qtBSC", }
         },
         [confirmPurchase.rejected]: (state) => {
             state.value.loading = false

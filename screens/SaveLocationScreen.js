@@ -4,7 +4,7 @@ import { colors } from '../Styles/colors';
 import * as ImagePicker from 'expo-image-picker';
 import renamePathAndMove from '../Utils/renamePath';
 import { useDispatch } from 'react-redux';
-import {addLocation} from '../features/locations'
+import {addLocation, addLocationDb} from '../features/locations'
 import LocationButton from '../Components/LacationButton';
 
 
@@ -63,6 +63,7 @@ const SaveLocationScreen = ({navigation, route}) => {
     // const path = await renamePathAndMove(picture);
     // console.log(path);
     dispatch(addLocation({title, picture, id: Date.now(), address:params?.address}))
+    dispatch(addLocationDb({title, picture, id, address:params?.address}))
     setTitle("");
     setPicture("");
   }
@@ -83,7 +84,7 @@ const SaveLocationScreen = ({navigation, route}) => {
         onChangeText={setTitle}
         placeholder="Título"
         placeholderTextColor="white"
-        
+        style={styles.input}
       />
       {picture ?
         <Image
@@ -124,5 +125,16 @@ const styles = StyleSheet.create({
     
     fontSize:36,
     marginBottom:15,
-  }
+  },
+  input: {
+    color: 'white',
+    textAlign:'center',
+    padding: 6,
+    width: '60%',
+    fontFamily: 'LatoRegular',
+    fontSize: 20,
+    backgroundColor: 'black',
+    borderRadius:6,
+    marginBottom:16
+},
 })

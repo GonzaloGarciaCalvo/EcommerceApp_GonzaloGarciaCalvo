@@ -9,7 +9,7 @@ export const init = () => {
             tx.executeSql('CREATE TABLE IF NOT EXISTS address(id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, picture TEXT NOT NULL, address TEXT NOT NULL)',
                 [],
                 () => {
-                    console.log("resuelve");
+                    console.log("resuelve Promise de init");
                     resolve()
                 },
                 (_, error) => {
