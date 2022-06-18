@@ -39,9 +39,9 @@ const CartScreen = ({navigation}) => {
        /*  if (order) console.log('llega orderId', order) */
       /* const orderId = JSON.parse(order) || null */
       //no ctualiza al cambiar valor
-     ( async () => await console.log("orden en useEfect",order))
+        console.log("orden en useEfect",order)
     }, [order])
-    async () => await console.log("orden en useEfect",order)
+
 
     return (
 			<View style={styles.container}>
@@ -63,7 +63,7 @@ const CartScreen = ({navigation}) => {
 						</View>
 					</TouchableOpacity>
 				</View>
-				{order ? <text>Tu numero de orden es:</text> : null}  {/* {No funciona} */} 
+				{order ? <text>Tu numero de orden es:</text> : null}  {/* {No actualiza!!!} */} 
 			</View>
 
 			//state.cart.value.response? => mostrar modal con orden de compra
