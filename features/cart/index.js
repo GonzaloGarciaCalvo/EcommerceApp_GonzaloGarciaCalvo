@@ -54,9 +54,7 @@ const cartSlice = createSlice({
     initialState: initialState,
     reducers: {
         addItem: (state, action) => {
-            // console.log(state.value.products);
             const productoRepetido = state.value.cart.find(producto => producto.id === action.payload.id)
-            /* console.log('producto repetido',productoRepetido); */
             if (productoRepetido) {
                 state.value.cart.map(item => {
                     if (item.id === action.payload.id) item.quantity++
@@ -79,18 +77,18 @@ const cartSlice = createSlice({
                 })
             }
             else if (productoamodificar.quantity = 1) {
-
                 let aux =state.value.cart.filter(producto => producto.id !== action.payload.id)
                 state.value.cart = aux
-                /* ****************************************************************
-                ERROR
-                AL BORRAR ELEMENTO DEL CARRITO, DETAIL QUEDA como primer stack y 
-                ********************************************************************/
             }
         },
         calcularTotal: (state,action) =>{
             const importeTotal = state.value.cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
-        }
+        },
+        emptyCart:(state, action)=>{
+            //vacia el carrito al confirmar compra
+            const aux=[]
+            state.value.cart = aux
+        },
     },
     extraReducers: {
         [confirmPurchase.pending]: (state) => {
@@ -110,6 +108,6 @@ const cartSlice = createSlice({
     }
 })
 
-export const { addItem, removeItem } = cartSlice.actions
+export const { addItem, removeItem, emptyCart } = cartSlice.actions
 
 export default cartSlice.reducer
