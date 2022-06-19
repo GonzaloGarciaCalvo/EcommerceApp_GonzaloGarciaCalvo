@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../features/cart'
 import { confirmPurchase, emptyCart } from '../features/cart';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { orderId } from '../features/cart';
 
 const handleConfirm = () => console.log("Se confirma la compra");
 
@@ -14,9 +15,12 @@ const CartScreen = ({navigation}) => {
     const [compraConfirmada, setCompraConfirmada] = useState(false)
     const dispatch = useDispatch()
     const { cart } = useSelector(state => state.cart.value)
-    const {order} = useSelector(state => state.cart.value.response) //NUevo
-    console.log("orden  ",order)
-    setTimeout(()=>console.log("orden setTimeout",order),5000)// Da UNDEFINED
+    /* const {order} = useSelector(state => state.cart.value)  *///NUevo
+
+    const [orderString, setOrderString] = useState("")
+    const order = useSelector(orderId)
+    console.log("orden de CartScreen ", order)
+    /* setTimeout(()=>console.log("orden setTimeout",JSON.parse(order)),10000) */// Da UNDEFINED
     /* const orderId = JSON.parse(order) || null */
     const handleDelete = (id) => { 
         dispatch(removeItem({id: id}))
@@ -27,7 +31,7 @@ const CartScreen = ({navigation}) => {
         dispatch(confirmPurchase(cart));
         dispatch(emptyCart(cart));//NUEVO  borra contenido carrito
         setCompraConfirmada(true);//NUevo
-        console.log("compra  ",compraConfirmada)
+       /*  console.log("compra  ",compraConfirmada) */
     };
     const renderItem = (data) => (
         <CartItem item={data.item} onDelete={handleDelete} />
@@ -35,11 +39,12 @@ const CartScreen = ({navigation}) => {
     const total = cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
 
     useEffect(() => {
-
        /*  if (order) console.log('llega orderId', order) */
       /* const orderId = JSON.parse(order) || null */
       //no ctualiza al cambiar valor
-        console.log("orden en useEfect",order)
+        /* console.log("orden en useEfect",order) */
+        /* let ordenUsuario = setOrderString( JSON.parse(order))
+        console.log("orden usuario  ",ordenUsuario) */
     }, [order])
 
 
@@ -63,10 +68,12 @@ const CartScreen = ({navigation}) => {
 						</View>
 					</TouchableOpacity>
 				</View>
-				{order ? <text>Tu numero de orden es:</text> : null}  {/* {No actualiza!!!} */} 
+				{order? 
+                    (<Text style={styles.order}>El Código de orden es:{order.name}</Text>) : null
+                } 
 			</View>
 
-			//state.cart.value.response? => mostrar modal con orden de compra
+			
 		);
 }
 
@@ -78,6 +85,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: colors.grisMarron,
         paddingBottom: 120,
+        fontFamily: 'LatoRegular',
     },
     list: {
         /* flex: 0.7, */
@@ -105,6 +113,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'LatoRegular',
         padding: 8,
-        
+    },
+    order:{
+        color:"white",
+        fontSize:18
     }
 })
+//state.cart.value.response? => mostrar modal con orden de compra

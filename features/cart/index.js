@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const initialState = {  
     value: {
         cart: [],
-        response: {},
+        response:'hola',
         loading: false,
         error: false,
     }
@@ -107,6 +107,7 @@ const cartSlice = createSlice({
         }
     }
 })
+export const orderId = state => state.cart.value.response
 
 export const { addItem, removeItem, emptyCart } = cartSlice.actions
 
