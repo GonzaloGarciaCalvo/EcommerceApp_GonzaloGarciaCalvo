@@ -15,7 +15,7 @@ export const getOrders = createAsyncThunk(
         try {
            const res = await fetch (`${DB_URL}orders.json`);
            const data = Object.values( await res.json()) 
-           console.log("data de getOrders",data);
+           /* console.log("data de getOrders",data); */
            return data
         } catch (error) {
             return rejectWithValue('Opps there seems to be an error')

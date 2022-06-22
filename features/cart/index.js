@@ -3,24 +3,29 @@ import { ImagePropTypes } from "react-native";
 import { DB_URL} from "../../Constants/firebase"
 import { PRODUCTS } from "../../Data/products";
 import { useDispatch, useSelector } from 'react-redux';
+import {USERID} from "../auth"
 
 
 
 /* const user = useSelector(state => state.auth.value.user.userId) */
+/* const user = getState().auth
+    console.log("user id en confirmPurchase",user.userId) */
 
 const initialState = {  
     value: {
         cart: [],
-        response:'hola',
+        response:'',
         loading: false,
         error: false,
+        total:'',
     }
 }
 
 export const confirmPurchase = createAsyncThunk(
     'cart/confirm',
-    async (items, importeTotal, asyncThunk) => {
-
+    async (items, asyncThunk) => {
+    /* console.log(USERID.userId) */
+    /* console.log("email de usuario en asyncThunk", asyncThunk.getState().auth.value.user.email) */
         try {
             const res = await fetch(
                 `${DB_URL}orders.json`,
@@ -30,11 +35,8 @@ export const confirmPurchase = createAsyncThunk(
                         date: new Date().toLocaleDateString(),
                         items: items,
                         id: Date.now(),
-                        /* importeTotal: importeTotal, */
-                        /* importeTotal: dispatch(calcularTotal) */ //MAL
-                        /* user:user, */
-                        /* para identificar orden con usuario
-                         */
+                        user:asyncThunk.getState().auth.value.user.email,
+                        total:asyncThunk.getState().cart.value.total,
                     })
                 }
     
@@ -83,12 +85,18 @@ const cartSlice = createSlice({
         },
         calcularTotal: (state,action) =>{
             const importeTotal = state.value.cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
+            state.value.total = importeTotal
+            console.log("total en reducer", state.value.total)
+            console.log("importeTotal en reducer", importeTotal)
         },
         emptyCart:(state, action)=>{
             //vacia el carrito al confirmar compra
             const aux=[]
             state.value.cart = aux
         },
+        resetOrderId:(state, action) =>{
+            state.value.response = ''
+        }
     },
     extraReducers: {
         [confirmPurchase.pending]: (state) => {
@@ -109,6 +117,7 @@ const cartSlice = createSlice({
 })
 export const orderId = state => state.cart.value.response
 
-export const { addItem, removeItem, emptyCart } = cartSlice.actions
+
+export const { addItem, removeItem, emptyCart, resetOrderId, calcularTotal } = cartSlice.actions
 
 export default cartSlice.reducer

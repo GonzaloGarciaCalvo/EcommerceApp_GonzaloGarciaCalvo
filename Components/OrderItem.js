@@ -13,7 +13,7 @@ const OrderItem = ({item}) => {
             <View>
                 <Text style={styles.date}>{formatDay(item.date)}</Text>
                 <Text style={styles.total}>${item.total}</Text>
-                <Text>{item.id}</Text>
+                <Text style={styles.id}>Orden: {item.id}</Text>
             </View>
         </View>
     )
@@ -40,6 +40,9 @@ const styles = StyleSheet.create({
     total: {
         fontSize: 18,
         fontFamily: 'LatoRegular',
+        color:'white',
+    },
+    id:{
         color:'white',
     }
 })

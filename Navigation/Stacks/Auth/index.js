@@ -29,7 +29,8 @@ const AuthStack = () => {
           name= "auth"
           component={AuthScreen}
           options={{
-            title: "Auth"
+            title: "Khimera Spirits",
+            fontFamily:"PoppinsRegular"
           }}
         >
         

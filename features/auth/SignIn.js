@@ -64,4 +64,8 @@ export const authSlice = createSlice({
     }
 })
 
+/* export const USERID_FROM_SIGNIN = (id) => { return async (dispatch, getSatate) => {
+    const userId = getSatate().auth.user.userId;}
+} */
+
 export default authSlice.reducer;

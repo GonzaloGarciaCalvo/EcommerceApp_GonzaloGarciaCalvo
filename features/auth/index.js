@@ -97,6 +97,7 @@ export const authSlice = createSlice({
             
             state.value.user.userId = payload.localId
             state.value.user.email = payload.email
+            console.log( "EMAIL USUARIO en extra reducer ",state.value.user.email)
             state.value.user.token = payload.idToken
         },
         [login.rejected]: (state) => {
@@ -106,5 +107,10 @@ export const authSlice = createSlice({
     }
 })
 
+/* export const USERID = state => state.auth.value.user.userId */
+/* export const USERID = (id) => { return async (dispatch, getSatate) => {
+    const userId = getSatate().auth.user.userId;}
+} */
+export const USERID = state => state.auth.value.user.email
 export const {logout} = authSlice.actions;
 export default authSlice.reducer;

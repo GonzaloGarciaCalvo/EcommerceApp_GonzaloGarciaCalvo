@@ -1,56 +1,55 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { colors } from '../Styles/colors'
 import CartItem from '../Components/CartItem'
-import { PRODUCTSSELECTED } from '../Data/productsSelected';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../features/cart'
 import { confirmPurchase, emptyCart } from '../features/cart';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { orderId } from '../features/cart';
+import { orderId, resetOrderId, calcularTotal } from '../features/cart';
 
-const handleConfirm = () => console.log("Se confirma la compra");
 
 const CartScreen = ({navigation}) => {
     const [compraConfirmada, setCompraConfirmada] = useState(false)
     const dispatch = useDispatch()
     const { cart } = useSelector(state => state.cart.value)
-    /* const {order} = useSelector(state => state.cart.value)  *///NUevo
 
     const [orderString, setOrderString] = useState("")
-    const order = useSelector(orderId)
+    const order = useSelector(orderId) 
     console.log("orden de CartScreen ", order)
-    /* setTimeout(()=>console.log("orden setTimeout",JSON.parse(order)),10000) */// Da UNDEFINED
-    /* const orderId = JSON.parse(order) || null */
     const handleDelete = (id) => { 
         dispatch(removeItem({id: id}))
-        
     }
     
+    /*************************************************
+     ****              handleConfirm            *****
+    si hay productos seleccionados borra el cart, 
+    *************************************************/
     const handleConfirm = () => {
-        dispatch(confirmPurchase(cart));
-        dispatch(emptyCart(cart));//NUEVO  borra contenido carrito
-        setCompraConfirmada(true);//NUevo
-       /*  console.log("compra  ",compraConfirmada) */
+        if (cart.length !== 0) {
+            dispatch(calcularTotal());
+            dispatch(confirmPurchase(cart));
+            setCompraConfirmada(true);
+            dispatch(emptyCart(cart));
+            console.log("Cart luego del finalizar compra con handleConfirm",cart)
+        }
     };
     const renderItem = (data) => (
         <CartItem item={data.item} onDelete={handleDelete} />
     )
     const total = cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
-
-    useEffect(() => {
-       /*  if (order) console.log('llega orderId', order) */
-      /* const orderId = JSON.parse(order) || null */
-      //no ctualiza al cambiar valor
-        /* console.log("orden en useEfect",order) */
-        /* let ordenUsuario = setOrderString( JSON.parse(order))
-        console.log("orden usuario  ",ordenUsuario) */
-    }, [order])
-
+    console.log("total en Cartscreen", total)
+    const handleResetOrderId = ()=>{
+        dispatch(resetOrderId(cart));
+        console.log("order en Cartscreen luego de Finalizar:  ",order )
+        console.log("Cart luego de finalizar",cart)
+    }
 
     return (
 			<View style={styles.container}>
-				{cart ? (
+				{cart.length !==0 ? (
+                //solo con cart no mostraba en Text del ternario
+                <>
 					<View style={styles.list}>
 						<FlatList
 							data={cart}
@@ -58,18 +57,21 @@ const CartScreen = ({navigation}) => {
 							renderItem={renderItem}
 						/>
 					</View>
-				) : null}
-				<View style={styles.footer}>
-					<TouchableOpacity style={styles.confirm} onPress={handleConfirm}>
-						<Text>Confirmar</Text>
-						<View style={styles.total}>
-							<Text style={styles.text}>Total</Text>
-							<Text style={styles.text}>${total}</Text>
-						</View>
-					</TouchableOpacity>
-				</View>
+                    <View style={styles.footer}>
+                        <TouchableOpacity style={styles.confirm} onPress={handleConfirm}>
+                            <Text>Confirmar</Text>
+                            <View style={styles.total}>
+                                <Text style={styles.text}>Total</Text>
+                                <Text style={styles.text}>${total}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    </>) : <Text style={styles.emptyCartMessege}>No hay productos en el carrito</Text>}
 				{order? 
-                    (<Text style={styles.order}>El Código de orden es:{order.name}</Text>) : null
+                    ( <><Text style={styles.order}>El Código de orden es:{order.name}</Text>
+                        <Button title='Finalizar' onPress={handleResetOrderId} />
+                    </>
+                    ) : null
                 } 
 			</View>
 
@@ -92,7 +94,6 @@ const styles = StyleSheet.create({
         color:'white',
         
     },
-    
     footer: {
         padding: 12,
         borderTopColor: colors.beige,
@@ -117,6 +118,11 @@ const styles = StyleSheet.create({
     order:{
         color:"white",
         fontSize:18
-    }
+    },
+    emptyCartMessege:{
+        color:"white",
+        fontSize:18,
+        textAlign:'center'
+    },
 })
 //state.cart.value.response? => mostrar modal con orden de compra

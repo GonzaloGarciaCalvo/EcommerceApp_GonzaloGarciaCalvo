@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux'
 import { login, signUp } from '../features/auth'
 import loginValidationSchema from '../Utils/validationYup'
 import {Formik} from 'formik';
+import LocationButton from '../Components/LacationButton'
+
 const LoginScreen = () => {
 
     const [registroVista, setRegistroVista] = useState(false)
@@ -63,23 +65,25 @@ const LoginScreen = () => {
                 >   
                     {({handleChange, errors, handleSubmit, values, handleBlur}) => (
                         <>
-                            <Input label="Email" password={false} onChange={handleChange('email')} value={values.email} error={errors.email} onBlur={handleBlur('email')} />
-                            <Input label="Password" password={true} onChange={handleChange('password')} value={values.password} error={errors.password} onBlur={handleBlur('password')}/>
-                            {registroVista && <Input label="Confirm password" password={true} onChange={handleChange('confirmPassword')} value={values.confirmPassword} onBlur={handleBlur('confirmPassword')} error={confirmPasswordError}/>}
-                            {registroVista ?
-                                <Button title="Signup" onPress={handleSubmit} />
-                                :
-                                <Button title="Login" onPress={handleSubmit} />
-                            }
+                            <View style={styles.imputsContainer}>
+                                <Input label="Email" password={false} onChange={handleChange('email')} value={values.email} error={errors.email} onBlur={handleBlur('email')} />
+                                <Input label="Password" password={true} onChange={handleChange('password')} value={values.password} error={errors.password} onBlur={handleBlur('password')}/>
+                                {registroVista && <Input label="Confirm password" password={true} onChange={handleChange('confirmPassword')} value={values.confirmPassword} onBlur={handleBlur('confirmPassword')} error={confirmPasswordError}/>}
+                                {registroVista ?
+                                    <LocationButton title="Signup" onPress={handleSubmit} additionalStyles={{width:120}} />
+                                    :
+                                    <LocationButton title="Login" onPress={handleSubmit} additionalStyles={{width:120}}/>
+                                }
+                            </View>
                             <View style={styles.textContainer}>
                                 {registroVista ?
-                                    <TouchableOpacity onPress={() => setRegistroVista(false)}>
+                                    <TouchableOpacity onPress={() => setRegistroVista(false)} >
                                         <Text>¿Ya tienes cuenta? <Text
                                             style={styles.link}
                                         >Login</Text></Text>
                                     </TouchableOpacity>
                                     :
-                                    <TouchableOpacity onPress={() => setRegistroVista(true)}>
+                                    <TouchableOpacity onPress={() => setRegistroVista(true)} >
                                         <Text>¿No tienes cuenta? <Text
                                             style={styles.link}
                                         >¡Crea una!</Text></Text>
@@ -98,6 +102,9 @@ const LoginScreen = () => {
 export default LoginScreen
 
 const styles = StyleSheet.create({
+    imputsContainer:{
+        width:260
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -130,10 +137,15 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     link: {
-        color: colors.lightBlue,
-        textDecorationLine: "underline"
+        color: colors.realyDarkBlue,
+        textDecorationLine: "underline",
+        fontSize:16,
+        fontWeight:"500",
     },
     input:{
         backgroundColor:'black'
+    },
+    button:{
+        width:140,
     }
 })
