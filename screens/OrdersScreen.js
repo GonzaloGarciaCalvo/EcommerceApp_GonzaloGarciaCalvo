@@ -16,23 +16,22 @@ const renderItem = ({item}) => (
 
 const OrdersScreen = () => {
 	const {orders} = useSelector(state => state.orders.value)
-	/* console.log("orders sin filtrar  ",orders)  */
 	const {USEREMAIL} = useSelector(state => state.auth.value.user)
 	const USUARIO = useSelector(USERID);
 	console.log("USEREMAIL  ", USEREMAIL)
 	console.log("USERID en OrderScreen  ",USUARIO)
 	const filteredOrderByUser = orders.filter(item => item.user === USUARIO) 
-	console.log("ordenes filtradas  ",filteredOrderByUser)
-	/* console.log("orders en OrderScreen  ",orders) */
+	/*console.log("ordenes filtradas  ",filteredOrderByUser) */
 	
 	const dispatch = useDispatch()
-	/* */
+
 	useEffect(()=> {
+		console.log("ordenes filtradas  ",filteredOrderByUser)
 			// dispatch(getOrders({id: 2, elemento: "Vino elemento"})) 
 			dispatch(getOrders()) 
-			//
+	
 	},[])
-    // sin el [orders] no actualiza, y con el tira por consola costantemente, re renderiza sin parar
+  // sin el [orders] como dependencia no actualiza, y con [orders] tira por consola costantemente, re renderiza sin parar
 	return (
 			<View style={styles.container}>
 				<FlatList
