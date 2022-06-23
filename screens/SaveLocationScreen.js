@@ -66,6 +66,7 @@ const SaveLocationScreen = ({navigation, route}) => {
     dispatch(addLocationDb({title, picture, id, address:params?.address}))
     setTitle("");
     setPicture("");
+    // FALTA EVITAR QUE SE PUEDA CONFIRMAR SIN FOTO NI DIRECCION
   }
 
   const handleSetLocation = () => {

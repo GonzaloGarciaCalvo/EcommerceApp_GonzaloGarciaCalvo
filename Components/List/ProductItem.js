@@ -5,7 +5,7 @@ const ProductItem = ({product}) => {
   
   return (
     <View style={styles.container}>
-      <Image source={{uri: product.image}} style={styles.image}/>
+      <Image source={product.image} style={styles.image}/>
       <Text style={styles.text}>{product.description}</Text>
     </View>
   )
@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     marginTop:30,
   },
   text:{
-    backgroundColor:'white'
+    backgroundColor:'white',
+    textAlign:'center',
+    fontSize:20,
   }
 })
+
+/* source={{uri: product.image}} */

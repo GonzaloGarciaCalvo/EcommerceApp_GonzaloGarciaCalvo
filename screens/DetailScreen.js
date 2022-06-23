@@ -6,7 +6,7 @@ import { colors } from '../Styles/colors'
 import MyButton from '../Components/MyButton';
 import LocationButton from '../Components/LacationButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../features/cart'
+import { addItem, calcularTotal } from '../features/cart'
 
 const DetailScreen = ({ 
     route,
@@ -28,6 +28,7 @@ const DetailScreen = ({
 
     const handleAdd = (id) => {
         dispatch(addItem({id: id}))
+        dispatch(calcularTotal())
     }
 
     return (
@@ -42,13 +43,13 @@ const DetailScreen = ({
 						}
 					>
 						<Image
-							source={{ uri: productSelected?.image }}
+							source={productSelected?.image }
 							style={styles.image}
 							resizeMode="cover"
 						/>
 						<Text style={styles.text}>
                             {productSelected?.description}
-                            </Text>
+                        </Text>
 						<Text style={styles.text}>
                             $ {productSelected?.price}
                         </Text>
@@ -56,7 +57,7 @@ const DetailScreen = ({
                         <LocationButton 
                             onPress={()=>handleAdd(productSelected.id)} 
                             title="Add to cart" 
-                            additionalStyles={{width:120}}
+                            additionalStyles={{width:120, marginTop:20, marginBottom:20}}
                         />
                         <MyButton handleBack={handleBack}/>
 						{/* <Button onPress={handleBack} title="Go back" /> */}

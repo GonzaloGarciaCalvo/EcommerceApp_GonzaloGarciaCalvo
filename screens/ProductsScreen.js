@@ -42,13 +42,8 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
         setInitialProducts(productosIniciales);
     }, [])
 
-/*     console.log(initialProducts);
-    console.log(productsFiltered); */
-
-   
     const handleDetailProduct = (product) => {
         dispatch(setProductSelected(product.id))
-        /* console.log(product); */
         navigation.navigate("Detail",{
             categoryTitle: category.category
             /* productId: product.id,

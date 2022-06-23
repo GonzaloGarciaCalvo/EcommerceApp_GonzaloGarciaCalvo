@@ -6,25 +6,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../features/cart'
 import { confirmPurchase, emptyCart } from '../features/cart';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { orderId, resetOrderId, calcularTotal } from '../features/cart';
+import { orderId, total, resetOrderId, calcularTotal } from '../features/cart';
+import { setReload,reload } from '../features/orders'
+
 
 
 const CartScreen = ({navigation}) => {
     const [compraConfirmada, setCompraConfirmada] = useState(false)
     const dispatch = useDispatch()
     const { cart } = useSelector(state => state.cart.value)
-
     const [orderString, setOrderString] = useState("")
     const order = useSelector(orderId) 
+    const importeTotal = useSelector(total)
     console.log("orden de CartScreen ", order)
     const handleDelete = (id) => { 
         dispatch(removeItem({id: id}))
+        dispatch(calcularTotal());
     }
-    
-    /*************************************************
-     ****              handleConfirm            *****
-    si hay productos seleccionados borra el cart, 
-    *************************************************/
+    const reloadOrder  = useSelector(reload)
+
     const handleConfirm = () => {
         if (cart.length !== 0) {
             dispatch(calcularTotal());
@@ -32,12 +32,14 @@ const CartScreen = ({navigation}) => {
             setCompraConfirmada(true);
             dispatch(emptyCart(cart));
             console.log("Cart luego del finalizar compra con handleConfirm",cart)
+            dispatch(setReload(true))
+            /* console.log("reloadOrder en Cartscreen  ",reloadOrder) */
         }
     };
     const renderItem = (data) => (
         <CartItem item={data.item} onDelete={handleDelete} />
     )
-    const total = cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
+    /* const total = cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0) */
     console.log("total en Cartscreen", total)
     const handleResetOrderId = ()=>{
         dispatch(resetOrderId(cart));
@@ -62,7 +64,7 @@ const CartScreen = ({navigation}) => {
                             <Text>Confirmar</Text>
                             <View style={styles.total}>
                                 <Text style={styles.text}>Total</Text>
-                                <Text style={styles.text}>${total}</Text>
+                                <Text style={styles.text}>${importeTotal}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>

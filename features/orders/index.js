@@ -6,6 +6,7 @@ const initialState = {
         orders: [],
         loading: false,
         error: false,
+        reload: true,
     }
 }
 
@@ -25,7 +26,12 @@ export const getOrders = createAsyncThunk(
 export const ordersSlice = createSlice({
     name: "orders",
     initialState,
-    reducers: {},
+    reducers: {
+        setReload: (state, {payload}) => {
+            state.value.reload = payload
+            console.log("payload en orderslice", payload)
+        }
+    },
     extraReducers: {
         [getOrders.pending]: (state) => {
             state.value.loading = true
@@ -40,5 +46,6 @@ export const ordersSlice = createSlice({
         }
     }
 })
-
+export const reload = state => state.orders.value.reload
+export const {setReload} = ordersSlice.actions
 export default ordersSlice.reducer

@@ -85,7 +85,11 @@ const cartSlice = createSlice({
         },
         calcularTotal: (state,action) =>{
             const importeTotal = state.value.cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0)
-            state.value.total = importeTotal
+            function round(num) {
+                var m = Number((Math.abs(num) * 100).toPrecision(15));
+                return Math.round(m) / 100 * Math.sign(num);
+            }
+            state.value.total = round(importeTotal)
             console.log("total en reducer", state.value.total)
             console.log("importeTotal en reducer", importeTotal)
         },
@@ -116,7 +120,7 @@ const cartSlice = createSlice({
     }
 })
 export const orderId = state => state.cart.value.response
-
+export const total = state => state.cart.value.total
 
 export const { addItem, removeItem, emptyCart, resetOrderId, calcularTotal } = cartSlice.actions
 
