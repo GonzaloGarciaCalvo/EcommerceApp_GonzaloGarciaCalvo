@@ -6,7 +6,7 @@ const initialState = {
         user: {
             userId: "",
             email: "",
-            token: " "  // si hay token entrar a la app
+            token: " "  
         },
         loading: false,
         error: "",
@@ -16,8 +16,6 @@ const initialState = {
 export const signIn = createAsyncThunk(
     'auth/signUp',
     async (emailAndPassword, asyncThunk) => {
-        // console.log(_);
-        // console.log(asyncThunk.getState());
         try {
             const res = await fetch (`${AUTH_LOGIN}`, {
                 method: 'POST',
@@ -55,7 +53,6 @@ export const authSlice = createSlice({
             state.value.user.userId = payload.localId
             state.value.user.email = payload.email
             state.value.user.token = payload.idToken
-            /* console.log("TOKEN: ",state.value.user.token ) */
         },
         [signUp.rejected]: (state) => {
             state.value.loading = false
@@ -63,9 +60,5 @@ export const authSlice = createSlice({
         }
     }
 })
-
-/* export const USERID_FROM_SIGNIN = (id) => { return async (dispatch, getSatate) => {
-    const userId = getSatate().auth.user.userId;}
-} */
 
 export default authSlice.reducer;

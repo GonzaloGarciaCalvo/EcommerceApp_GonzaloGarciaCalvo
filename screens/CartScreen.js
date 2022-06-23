@@ -4,10 +4,10 @@ import { colors } from '../Styles/colors'
 import CartItem from '../Components/CartItem'
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../features/cart'
-import { confirmPurchase, emptyCart } from '../features/cart';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { orderId, total, resetOrderId, calcularTotal } from '../features/cart';
+import { confirmPurchase, orderId, total, resetOrderId, calcularTotal,addItem , emptyCart } from '../features/cart';
 import { setReload,reload } from '../features/orders'
+import LocationButton from '../Components/LacationButton';
 
 
 
@@ -18,11 +18,16 @@ const CartScreen = ({navigation}) => {
     const [orderString, setOrderString] = useState("")
     const order = useSelector(orderId) 
     const importeTotal = useSelector(total)
-    console.log("orden de CartScreen ", order)
+
     const handleDelete = (id) => { 
         dispatch(removeItem({id: id}))
         dispatch(calcularTotal());
     }
+    const handleAdd = (id) => {
+        dispatch(addItem({id: id}))
+        dispatch(calcularTotal());
+    }
+
     const reloadOrder  = useSelector(reload)
 
     const handleConfirm = () => {
@@ -31,26 +36,23 @@ const CartScreen = ({navigation}) => {
             dispatch(confirmPurchase(cart));
             setCompraConfirmada(true);
             dispatch(emptyCart(cart));
-            console.log("Cart luego del finalizar compra con handleConfirm",cart)
             dispatch(setReload(true))
-            /* console.log("reloadOrder en Cartscreen  ",reloadOrder) */
         }
     };
     const renderItem = (data) => (
-        <CartItem item={data.item} onDelete={handleDelete} />
+        <CartItem item={data.item} onDelete={handleDelete} onAdd={handleAdd} />
     )
-    /* const total = cart.reduce((prev, current) => (prev) + (current.price*current.quantity),0) */
-    console.log("total en Cartscreen", total)
+
     const handleResetOrderId = ()=>{
         dispatch(resetOrderId(cart));
-        console.log("order en Cartscreen luego de Finalizar:  ",order )
-        console.log("Cart luego de finalizar",cart)
+    }
+    const handleDeleteSelection = () => {
+        dispatch(emptyCart(cart))
     }
 
     return (
 			<View style={styles.container}>
 				{cart.length !==0 ? (
-                //solo con cart no mostraba en Text del ternario
                 <>
 					<View style={styles.list}>
 						<FlatList
@@ -68,17 +70,18 @@ const CartScreen = ({navigation}) => {
                             </View>
                         </TouchableOpacity>
                     </View>
-                    </>) : <Text style={styles.emptyCartMessege}>No hay productos en el carrito</Text>}
+                    <LocationButton title="Borrar Selección" onPress={handleDeleteSelection} additionalStyles={{width:160, marginTop:24}}/>
+                    </>
+                ) : <Text style={styles.emptyCartMessege}>No hay productos en el carrito</Text>
+                }
 				{order? 
-                    ( <><Text style={styles.order}>El Código de orden es:{order.name}</Text>
-                        <Button title='Finalizar' onPress={handleResetOrderId} />
+                    ( <><Text style={styles.order}>El Código de orden es: {order.name}</Text>
+                        <LocationButton title='Finalizar' onPress={handleResetOrderId} additionalStyles={{width:160, marginTop:24}}/>
                     </>
                     ) : null
                 } 
 			</View>
-
-			
-		);
+	);
 }
 
 export default CartScreen
@@ -92,7 +95,6 @@ const styles = StyleSheet.create({
         fontFamily: 'LatoRegular',
     },
     list: {
-        /* flex: 0.7, */
         color:'white',
         
     },
@@ -127,4 +129,3 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
 })
-//state.cart.value.response? => mostrar modal con orden de compra

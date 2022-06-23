@@ -30,8 +30,6 @@ const OrdersScreen = () => {
 
 	useEffect(()=> {
 		if (reloadOrder) {
-			/* console.log("ordenes filtradas  ",filteredOrderByUser) */
-				// dispatch(getOrders({id: 2, elemento: "Vino elemento"})) 
 			dispatch(getOrders()) 
 			dispatch(setReload(false))
 

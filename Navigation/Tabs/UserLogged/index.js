@@ -89,10 +89,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 0.25,
     elevation: 5,
-    /* position: "absolute", */ // Con esto, el btn Go Back queda visible pero pegado al Tab
-    /* bottom:0, */
-    /*left: 20,
-    right: 20,  */
     borderRadius: 5,
     height: 60,
   },

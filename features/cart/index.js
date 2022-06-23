@@ -2,14 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ImagePropTypes } from "react-native";
 import { DB_URL} from "../../Constants/firebase"
 import { PRODUCTS } from "../../Data/products";
-import { useDispatch, useSelector } from 'react-redux';
-import {USERID} from "../auth"
-
-
-
-/* const user = useSelector(state => state.auth.value.user.userId) */
-/* const user = getState().auth
-    console.log("user id en confirmPurchase",user.userId) */
 
 const initialState = {  
     value: {
@@ -24,8 +16,6 @@ const initialState = {
 export const confirmPurchase = createAsyncThunk(
     'cart/confirm',
     async (items, asyncThunk) => {
-    /* console.log(USERID.userId) */
-    /* console.log("email de usuario en asyncThunk", asyncThunk.getState().auth.value.user.email) */
         try {
             const res = await fetch(
                 `${DB_URL}orders.json`,
@@ -94,7 +84,6 @@ const cartSlice = createSlice({
             console.log("importeTotal en reducer", importeTotal)
         },
         emptyCart:(state, action)=>{
-            //vacia el carrito al confirmar compra
             const aux=[]
             state.value.cart = aux
         },
@@ -110,7 +99,7 @@ const cartSlice = createSlice({
         [confirmPurchase.fulfilled]: (state, {payload}) => {
             state.value.response = payload
             state.value.loading = false
-            console.log('respuesta de firebase ', state.value.response) //Object {"name": "-N4iXnTA9U9EgJ5qtBSC", }
+            console.log('respuesta de firebase ', state.value.response) 
         },
         [confirmPurchase.rejected]: (state) => {
             state.value.loading = false

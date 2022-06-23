@@ -53,14 +53,12 @@ const DetailScreen = ({
 						<Text style={styles.text}>
                             $ {productSelected?.price}
                         </Text>
-                       {/*  <Button onPress={()=>handleAdd(productSelected.id)} title="Add to cart" /> */}
                         <LocationButton 
                             onPress={()=>handleAdd(productSelected.id)} 
                             title="Add to cart" 
                             additionalStyles={{width:120, marginTop:20, marginBottom:20}}
                         />
                         <MyButton handleBack={handleBack}/>
-						{/* <Button onPress={handleBack} title="Go back" /> */}
 					</View>
 				</>
 			)

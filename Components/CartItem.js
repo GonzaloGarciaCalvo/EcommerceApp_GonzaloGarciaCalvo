@@ -2,8 +2,9 @@ import { StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-nativ
 import React from 'react'
 import { colors } from '../Styles/colors';
 import {Ionicons} from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
-const CartItem = ({item, onDelete}) => {
+const CartItem = ({item, onDelete, onAdd}) => {
   return (
     <View style={styles.item}>
       <View>
@@ -14,8 +15,11 @@ const CartItem = ({item, onDelete}) => {
           <Text style={styles.text}>Cantidad: {item.quantity}</Text>
           <Text style={styles.text}>${item.price}</Text>
         </View>
+        <TouchableOpacity onPress={()=> onAdd(item.id)}>
+          <AntDesign name="pluscircleo" size={24} color="black" />
+        </TouchableOpacity>
         <TouchableOpacity onPress={()=> onDelete(item.id)}>
-          <Ionicons name="trash" size={24}></Ionicons>
+          <AntDesign name="minuscircleo" size={24} color="black" />
         </TouchableOpacity>
       </View>
 

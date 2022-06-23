@@ -16,7 +16,6 @@ const initialState = {
 export const signUp = createAsyncThunk(
     'auth/signUp',
     async (emailAndPassword, asyncThunk) => {
-        // console.log(_);
         // console.log(asyncThunk.getState());
         try {
            const res = await fetch (`${AUTH_SIGNUP}`, {
@@ -40,20 +39,19 @@ export const login = createAsyncThunk(
     'auth/login',
     async (emailAndPassword, asyncThunk) => {
         console.log(emailAndPassword);
-        // console.log(asyncThunk.getState());
         try {
-           const res = await fetch (`${AUTH_LOGIN}`, {
-               method: 'POST',
-               body: JSON.stringify({
-                   email: emailAndPassword.email,
-                   password: emailAndPassword.password,
-                   returnSecureToken: true,
-               })
-           });
-           const data = await res.json()
-           console.log(data);
-           return data
-        } catch (error) {
+            const res = await fetch (`${AUTH_LOGIN}`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: emailAndPassword.email,
+                    password: emailAndPassword.password,
+                    returnSecureToken: true,
+                })
+            });
+            const data = await res.json()
+            console.log(data);
+            return data
+        }catch (error) {
             return rejectWithValue('Opps there seems to be an error')
         }
     }
@@ -107,10 +105,6 @@ export const authSlice = createSlice({
     }
 })
 
-/* export const USERID = state => state.auth.value.user.userId */
-/* export const USERID = (id) => { return async (dispatch, getSatate) => {
-    const userId = getSatate().auth.user.userId;}
-} */
 export const USERID = state => state.auth.value.user.email
 export const {logout} = authSlice.actions;
 export default authSlice.reducer;

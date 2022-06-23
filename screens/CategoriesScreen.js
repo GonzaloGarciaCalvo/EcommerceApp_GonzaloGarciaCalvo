@@ -16,12 +16,10 @@ const CategoriesScreen = ({navigation}) => {
     const [categoriesFilter, setCategoriesFilter] = useState()
     const {categories} = useSelector(state => state.categories.value)
     const dispatch = useDispatch();
-    /* console.log(categories); */
 
     useEffect(()=> {
         if (input === "") setCategoriesFilter(categories)
         else {
-            /* console.log("Se ejecuta el efecto"); */
             let categoriasFiltradas = CATEGORIES.filter(category => category.category.toLowerCase().includes(input.toLowerCase()))
             setCategoriesFilter(categoriasFiltradas)
         }
@@ -43,11 +41,8 @@ const CategoriesScreen = ({navigation}) => {
 
     return (
         <>
-            {/* <Header /> */}
             <View style={styles.container}>
                 <Searcher additionalStyles={{
-                    /* backgroundColor: "white", width:'80%', flexDirection:'row' */
-                    // el flexDirection y width solo me los tomo en línea, no en el componente
                 }}>
                     <TextInput
                         value={input}
@@ -80,7 +75,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.grisMarron,
     },
     input: {
-        /* flex:1, */
         width: '75%',
         height: 40,
         margin: 8,

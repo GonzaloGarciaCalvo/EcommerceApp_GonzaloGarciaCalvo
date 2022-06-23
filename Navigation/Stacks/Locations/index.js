@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CartScreen from '../../../Screens/CartScreen';
 import { colors } from '../../../Styles/colors';
 import LocationsScreen from '../../../Screens/LocationsScreen';
 import SaveLocationScreen from '../../../Screens/SaveLocationScreen';
@@ -24,10 +23,6 @@ const LocationStack = () => {
             fontSize: 26,
           },
           headerTitleAlign: "center",
-          // headerTransparent: true,
-          // header: () => {
-          //   return <Header/>
-          // }
         }}
       >
         <Stack.Screen
