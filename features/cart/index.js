@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ImagePropTypes } from "react-native";
 import { DB_URL} from "../../Constants/firebase"
 import { PRODUCTS } from "../../Data/products";
 

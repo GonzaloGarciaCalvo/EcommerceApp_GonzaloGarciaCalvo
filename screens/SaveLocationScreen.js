@@ -1,8 +1,7 @@
-import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, {useState} from 'react'
 import { colors } from '../Styles/colors';
 import * as ImagePicker from 'expo-image-picker';
-import renamePathAndMove from '../Utils/renamePath';
 import { useDispatch } from 'react-redux';
 import {addLocation, addLocationDb} from '../features/locations'
 import LocationButton from '../Components/LacationButton';
@@ -59,15 +58,16 @@ const SaveLocationScreen = ({navigation, route}) => {
     setPicture(image.uri);
   }
 
+  // Requiere foto y titulo
   const handleConfirm = async () => {
-    // const path = await renamePathAndMove(picture);
-    // console.log(path);
-    dispatch(addLocation({title, picture, id: Date.now(), address:params?.address}))
+    if (title && picture) {
+    let id = Date.now()
+    dispatch(addLocation({title, picture, id, address:params?.address}))
     dispatch(addLocationDb({title, picture, id, address:params?.address}))
     setTitle("");
     setPicture("");
-    // FALTA EVITAR QUE SE PUEDA CONFIRMAR SIN FOTO NI DIRECCION
-  }
+    }
+  }  
 
   const handleSetLocation = () => {
     navigation.navigate("Set-location");
@@ -94,7 +94,6 @@ const SaveLocationScreen = ({navigation, route}) => {
         />
         : null
       }
-      {/* <Button title='Tomar una foto' onPress={handleTakePicture}  /> */}
       <LocationButton  title='Tomar una foto' onPress={handleTakePicture}/>
       <LocationButton title="Seleccionar de la galería" onPress={handlePickLibrary} />
       <LocationButton title="Obtener ubicación" onPress={handleLocation} />
