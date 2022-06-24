@@ -1,15 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CategoriesScreen from '../../../Screens/CategoriesScreen';
 import ProductsScreen from '../../../Screens/ProductsScreen';
 import DetailScreen from '../../../Screens/DetailScreen';
 import { colors } from '../../../Styles/colors';
+import {logout} from '../../../features/auth';
+import { useDispatch } from 'react-redux';
+import { AntDesign } from '@expo/vector-icons';
+
 
 const Stack = createNativeStackNavigator();
 
+
+
 function ShopNavigator() {
+  const dispatch = useDispatch();
+  const handleLogOut = () =>{
+    dispatch(logout())
+  }
+
   return (
+
       <Stack.Navigator initialRouteName="Categories"
             screenOptions={{
               headerStyle: {
@@ -29,6 +41,11 @@ function ShopNavigator() {
           options={
             {
               title: "Khimera Spirits",
+              headerRight: () => (
+                <TouchableOpacity onPress={handleLogOut}>
+                  <AntDesign name="logout" size={18} color="white" />
+                </TouchableOpacity>
+              ),
             } 
           }
         />

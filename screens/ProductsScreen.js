@@ -46,8 +46,6 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
         dispatch(setProductSelected(product.id))
         navigation.navigate("Detail",{
             categoryTitle: category.category
-            /* productId: product.id,
-            productTitle: product.description */
         })
     }
 
@@ -63,7 +61,6 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.keyboardAvoid}
         >
-            {/* <Header title={category.category} /> */}
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.container}>
                     <Searcher additionalStyles={{
