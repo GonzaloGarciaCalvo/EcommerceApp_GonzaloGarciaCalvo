@@ -33,7 +33,6 @@ export const confirmPurchase = createAsyncThunk(
             const data = res.json();
             return data;
         } catch (error) {
-            console.log('error en carga')
             return rejectWithValue('Opps there seems to be an error')
             
         }
@@ -79,8 +78,6 @@ const cartSlice = createSlice({
                 return Math.round(m) / 100 * Math.sign(num);
             }
             state.value.total = round(importeTotal)
-            console.log("total en reducer", state.value.total)
-            console.log("importeTotal en reducer", importeTotal)
         },
         emptyCart:(state, action)=>{
             const aux=[]
@@ -98,12 +95,10 @@ const cartSlice = createSlice({
         [confirmPurchase.fulfilled]: (state, {payload}) => {
             state.value.response = payload
             state.value.loading = false
-            console.log('respuesta de firebase ', state.value.response) 
         },
         [confirmPurchase.rejected]: (state) => {
             state.value.loading = false
             state.value.error = true
-            console.log("fallo la compra")
         }
     }
 })

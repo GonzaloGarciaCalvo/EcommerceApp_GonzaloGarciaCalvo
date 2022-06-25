@@ -29,7 +29,6 @@ export const ordersSlice = createSlice({
     reducers: {
         setReload: (state, {payload}) => {
             state.value.reload = payload
-            console.log("payload en orderslice", payload)
         }
     },
     extraReducers: {
