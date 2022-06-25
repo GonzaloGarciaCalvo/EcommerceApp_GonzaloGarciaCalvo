@@ -10,7 +10,7 @@ En TAB orders se muestran todas las ordenes realizadas por el usuario, que se ac
 En TAB ubicación se puede seleccionar una locación, u obtenerla con googlemaps, tomar una foto o seleccionar una de galería y guardar la locación. Para guardar la locación se equiere al menos completar el título y la imágen.
 
 # Herramientas
-Aplicación creada con expo
+Aplicación de React Native creada con expo
 
 ## Librerías
 - "@react-navigation/bottom-tabs": "^6.3.1",
