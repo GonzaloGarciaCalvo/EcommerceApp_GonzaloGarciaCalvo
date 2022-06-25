@@ -1,8 +1,6 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React, {useState, useEffect } from 'react'
+import { FlatList, StyleSheet, View } from 'react-native'
+import React, { useEffect } from 'react'
 import OrderItem from '../Components/OrderItem'
-import { ORDERS } from '../Data/order'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { colors } from '../Styles/colors'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrders } from '../features/orders'
@@ -21,10 +19,7 @@ const OrdersScreen = () => {
 	const USUARIO = useSelector(USERID);
 	const reloadOrder  = useSelector(reload)
   console.log ("reload en OrderScreen, entra desde CartScreen:   ",reloadOrder)
-	/* console.log("USEREMAIL  ", USEREMAIL) */
-	/* console.log("USERID en OrderScreen  ",USUARIO) */
 	const filteredOrderByUser = orders.filter(item => item.user === USUARIO) 
-	/*console.log("ordenes filtradas  ",filteredOrderByUser) */
 	
 	const dispatch = useDispatch()
 
@@ -36,7 +31,7 @@ const OrdersScreen = () => {
 		}
 	
 	},[reloadOrder])
-  // sin el [orders] como dependencia no actualiza, y con [orders] tira por consola costantemente, re renderiza sin parar
+
 	return (
 			<View style={styles.container}>
 				<FlatList

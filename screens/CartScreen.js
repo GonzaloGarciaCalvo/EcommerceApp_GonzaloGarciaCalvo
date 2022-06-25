@@ -1,10 +1,9 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native'
-import React, {useEffect, useState} from 'react'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState} from 'react'
 import { colors } from '../Styles/colors'
 import CartItem from '../Components/CartItem'
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../features/cart'
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { confirmPurchase, orderId, total, resetOrderId, calcularTotal,addItem , emptyCart } from '../features/cart';
 import { setReload,reload } from '../features/orders'
 import LocationButton from '../Components/LacationButton';

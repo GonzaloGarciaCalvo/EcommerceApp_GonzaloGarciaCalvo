@@ -3,9 +3,6 @@ import React, { useEffect, useState } from 'react'
 import * as Location from 'expo-location';
 import { API_KEY } from '../Constants/googleAPI';
 
-//https://developers.google.com/maps/documentation/maps-static/start DOC API
-//https://developers.google.com/maps/documentation/maps-static/start#Markers Markers DOC
-
 const GetLocationScreen = ({navigation}) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -42,8 +39,6 @@ const GetLocationScreen = ({navigation}) => {
 
       (async () => {
         console.log("Entro");
-        // console.log(location);
-        //Seteamos la url de la foto
         setPhoto(`https://maps.googleapis.com/maps/api/staticmap?center=${location.lat},${location.lng}&zoom=13&size=600x600&maptype=roadmap&markers=color:red%7Clabel:C%7C${location.lat},${location.lng}&key=${API_KEY}`)
         //Reverse geocode
         const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${API_KEY}`)
@@ -63,7 +58,6 @@ const GetLocationScreen = ({navigation}) => {
     text = JSON.stringify(location);
   }
 
-  // console.log(photo);
   const handleConfirmLocation = () => {
     navigation.navigate("Save-location", {address})
   }

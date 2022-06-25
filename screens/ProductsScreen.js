@@ -25,7 +25,6 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
         setInput("")
     }
 
-    //Buscar productos según el input.
     useEffect(()=> {
         if(productsByCategory.length !== 0){
             if (input === "") setProductsFiltered(productsByCategory)
@@ -36,7 +35,6 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
         }
     }, [input, productsByCategory])
 
-    //Realiza el filtro inicial de productos por categoría
     useEffect(()=>{
         const productosIniciales = PRODUCTS.filter(product => product.category === categoryId)
         setInitialProducts(productosIniciales);
@@ -83,7 +81,6 @@ const ProductsScreen = ({category = {id: 1, category: "Spirits"}, navigation, ro
                             itemType={"Producto"} 
                             onPress={handleDetailProduct} 
                         />     
-                        {/* <Button title="Go back" onPress={handleBack}style={styles.btn} /> */}
                         <MyButton handleBack={handleBack}/>
                     </View>
                 </View>
@@ -104,8 +101,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         backgroundColor: colors.grisMarron,
-        /* marginBottom:50, */
-        /* height:Dimensions.get('window').height*1.2, */
     },
     input: {
         width: '75%',
@@ -120,8 +115,6 @@ const styles = StyleSheet.create({
     listContainer: {
         flex: 1,
     },
-    /* btn: {
-        width:120
-    } */
+
 })
 

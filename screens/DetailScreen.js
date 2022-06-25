@@ -1,7 +1,5 @@
 import { StyleSheet, Text, View, Image, Dimensions, Button, useWindowDimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Header from '../Components/Header'
-import { PRODUCTS } from '../Data/products'
 import { colors } from '../Styles/colors'
 import MyButton from '../Components/MyButton';
 import LocationButton from '../Components/LacationButton'

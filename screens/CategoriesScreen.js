@@ -1,6 +1,5 @@
 import { StyleSheet, TextInput, TouchableOpacity, View, image } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Header from '../Components/Header'
 import Searcher from '../Components/Searcher'
 import { colors } from '../Styles/colors'
 import List from '../Components/List'
