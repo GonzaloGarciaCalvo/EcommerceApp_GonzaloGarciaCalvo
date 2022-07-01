@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, TouchableOpacity, View, image } from 'react-native'
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Searcher from '../Components/Searcher'
 import { colors } from '../Styles/colors'

@@ -60,7 +60,6 @@ const cartSlice = createSlice({
             const productoamodificar = state.value.cart.find(producto => producto.id === action.payload.id)
             
             if (productoamodificar.quantity >1) {
-                console.log('producto repetido antes de romover item',productoamodificar);
                 state.value.cart.map(item => {
                     if (item.id === action.payload.id) item.quantity--
                     return item

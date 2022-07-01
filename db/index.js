@@ -9,12 +9,12 @@ export const init = () => {
             tx.executeSql('CREATE TABLE IF NOT EXISTS address(id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, picture TEXT NOT NULL, address TEXT NOT NULL)',
                 [],
                 () => {
-                    console.log("resuelve Promise de init");
+                    /* console.log("resuelve Promise de init"); */
                     resolve()
                 },
                 (_, error) => {
-                    console.log("No resuelve");
-                    console.log(error.message);
+                    /* console.log("No resuelve");
+                    console.log(error.message); */
                     reject(error)
                 }
             )

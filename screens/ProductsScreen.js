@@ -1,13 +1,11 @@
-import { Button, KeyboardAvoidingView, TouchableWithoutFeedback, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard, Dimensions,ScrollView  } from 'react-native'
+import { KeyboardAvoidingView, TouchableWithoutFeedback, Platform, StyleSheet, TextInput, TouchableOpacity, View, Keyboard } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import Searcher from '../Components/Searcher';
 import { Entypo } from '@expo/vector-icons';
 import { PRODUCTS } from '../Data/products';
-import Header from '../Components/Header';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
 import MyButton from '../Components/MyButton';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProductSelected } from '../features/products';
 

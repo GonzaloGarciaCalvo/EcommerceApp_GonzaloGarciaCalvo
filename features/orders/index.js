@@ -18,7 +18,8 @@ export const getOrders = createAsyncThunk(
             const data = Object.values( await res.json()) 
             return data
         } catch (error) {
-            return rejectWithValue('Opps there seems to be an error')
+            return console.log("pedido rechazado")/* (rejectWithValue('Opps there seems to be an error') */
+            
         }
     }
 )
@@ -38,10 +39,12 @@ export const ordersSlice = createSlice({
         [getOrders.fulfilled]: (state, {payload}) => {
             state.value.loading = false
             state.value.orders = payload
+            console.log('orders llegan', state.value.orders)
         },
         [getOrders.rejected]: (state) => {
             state.value.loading = false
             state.value.error = true
+            console.log("orders, pedido rechazado")
         }
     }
 })

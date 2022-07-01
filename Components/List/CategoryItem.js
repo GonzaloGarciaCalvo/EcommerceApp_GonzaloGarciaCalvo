@@ -1,11 +1,19 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
-import { colors } from '../../Styles/colors'
+import { useWindowDimensions } from 'react-native';
+
 
 const CategoryItem = ({category}) => {
+  const {width, height} = useWindowDimensions();
+
   return (
-    <View style={styles.container}>
-        <Image  source={category.image} style={styles.image} />
+    <View style={{
+      ...styles.container, 
+      maxWidth: 0.43 * width,
+      maxHeight: 0.46 * width,
+      margin: width < 330 ? 10: 15,
+    }}>
+      <Image  source={category.image} style={styles.image} />
       <Text style={styles.text}>{category.category}</Text>
     </View>
   )
@@ -17,8 +25,6 @@ const styles = StyleSheet.create({
   container: {
     width: 160,
     height: 187,
-    /* justifyContent: 'flex-end',
-    alignItems: 'flex-end', */
     justifyContent:'center',
     alignItems:'center',
     padding: 10,
@@ -37,15 +43,3 @@ const styles = StyleSheet.create({
   },
 })
 
-/* source={require('../../assets/images/Spirits.jpg')} */
-{/* <image 
-          source={{uri:'https://picsum.photos/200/300'}}
-          style={{width:100, height:100}}
-      /> */}
-
-   {/* <ImageBackground source={{uri:category}} resizeMode='cover' style={styles.screen}> 
-			<View style={styles.container}>
-      <Text style={styles.text}>{category.category}</Text>
-    </View>
-   </ImageBackground> */} 
-   {/* <Image  source={require('../../assets/images/Spirits.jpg')} style={styles.image} /> */}

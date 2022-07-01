@@ -3,8 +3,7 @@ import React, { useState} from 'react'
 import { colors } from '../Styles/colors'
 import CartItem from '../Components/CartItem'
 import { useDispatch, useSelector } from 'react-redux';
-import { removeItem } from '../features/cart'
-import { confirmPurchase, orderId, total, resetOrderId, calcularTotal,addItem , emptyCart } from '../features/cart';
+import { confirmPurchase, orderId, total, resetOrderId, calcularTotal,addItem , emptyCart, removeItem } from '../features/cart';
 import { setReload,reload } from '../features/orders'
 import LocationButton from '../Components/LacationButton';
 

@@ -1,10 +1,10 @@
-import { FlatList, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import { FlatList, StyleSheet, TouchableOpacity, } from 'react-native'
 import React from 'react'
 import CategoryItem from './CategoryItem'
 import ProductItem from './ProductItem'
-import MyButton from '../MyButton'
 
-const List = ({ itemType = "category", data, onPress, navigation}) => {
+
+const List = ({ itemType = "category", data, onPress}) => {
 
     const fnRender = ({item}) => {
         return(

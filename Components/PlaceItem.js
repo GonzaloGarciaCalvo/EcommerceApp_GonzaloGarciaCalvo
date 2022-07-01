@@ -1,23 +1,25 @@
-import { StyleSheet, Text, Touchable, TouchableOpacity, View, Image} from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native'
 import React from 'react'
 import { colors } from '../Styles/colors'
+import { useDispatch } from 'react-redux';
 
 const PlaceItem = ({onSelect, title, image, address}) => {
-  return (
-    <TouchableOpacity
-        onPress={onSelect}
-        style={styles.placeItem}
-    >
-        <Image 
-            style={styles.image}
-            source = {{uri: image}}
-        />
-        <View style={styles.info}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.address}>{address}</Text>
-        </View>
-    </TouchableOpacity>
-  )
+    
+    return (
+        <TouchableOpacity
+            onPress={onSelect}
+            style={styles.placeItem}
+        >
+            <Image 
+                style={styles.image}
+                source = {{uri: image}}
+            />
+            <View style={styles.info}>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.address}>{address}</Text>
+            </View>
+        </TouchableOpacity>
+    )
 }
 
 export default PlaceItem

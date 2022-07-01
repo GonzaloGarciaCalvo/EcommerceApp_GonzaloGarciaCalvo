@@ -3,9 +3,8 @@ import React, { useEffect } from 'react'
 import OrderItem from '../Components/OrderItem'
 import { colors } from '../Styles/colors'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOrders } from '../features/orders'
+import { getOrders, setReload, reload } from '../features/orders'
 import {USERID} from "../features/auth"
-import { setReload, reload } from '../features/orders'
 
 const renderItem = ({item}) => (
     <OrderItem 

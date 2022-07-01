@@ -65,6 +65,7 @@ const locationSlice = createSlice({
         },
         removeLocation: (state, {payload}) => {
             state.value.locations = state.value.locations.filter(location => location.id !== payload.id)
+            console.log("remover locacion")
         }
     },
     extraReducers: {

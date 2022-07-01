@@ -1,5 +1,5 @@
 import { Button, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useEffect, useState } from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import * as Location from 'expo-location';
 import { API_KEY } from '../Constants/googleAPI';
@@ -15,6 +15,23 @@ const SetLocationScreen = ({navigation}) => {
         latitudeDelta: 0.09,
         longitudeDelta: 0.04
     }
+    useLayoutEffect(() => {
+        //IIFE
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+            let location = await Location.getCurrentPositionAsync({});
+            setInitialLocation({
+                ...initialLocation,
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+            })
+        })();
+
+    }, []);
 
     useEffect(() => {
         (async () => {
@@ -62,12 +79,9 @@ const SetLocationScreen = ({navigation}) => {
                                 latitude: location.lat,
                                 longitude: location.lng,
                             }}
-                        
                         />
                         :
                         null
-                        
-                    
                         }
 
                     </MapView>
