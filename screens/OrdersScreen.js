@@ -14,10 +14,8 @@ const renderItem = ({item}) => (
 
 const OrdersScreen = () => {
 	const {orders} = useSelector(state => state.orders.value)
-	const {USEREMAIL} = useSelector(state => state.auth.value.user)
 	const USUARIO = useSelector(USERID);
 	const reloadOrder  = useSelector(reload)
-  console.log ("reload en OrderScreen, entra desde CartScreen:   ",reloadOrder)
 	const filteredOrderByUser = orders.filter(item => item.user === USUARIO) 
 	
 	const dispatch = useDispatch()
